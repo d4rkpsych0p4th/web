@@ -1,0 +1,23 @@
+
+h1{  color:#0000FF;
+    text-align: center;
+}
+
+p{  color:#808080;
+    text-align: center;
+    margin: 15px;
+}
+
+
+ul{  
+    border-style: dotted; 
+}
+
+#destacado{ 
+    background: yellow;
+
+}
+
+.importante{
+    font-weight: bold;
+}
