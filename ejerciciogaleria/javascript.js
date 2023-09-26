@@ -10,6 +10,7 @@ function updateImage() {
     imageContainer.innerHTML = `<img src="${currentImage}" alt="Imagen ${currentIndex + 1}">`;
 }
 
+
 prevButton.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     updateImage();

@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+span {
+    flex-grow: 1;
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-decoration 0.3s; /* Agregamos una transición para una animación suave */
+}
+
+span.completada {
+    text-decoration: line-through;
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #555;
+}
