@@ -1,0 +1,45 @@
+body {
+    background-color: blue;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+span {
+    flex-grow: 1;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+span.completada {
+    text-decoration: line-through;
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #555;
+}

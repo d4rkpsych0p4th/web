@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calcular</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Área</h1>
+        
+        <div>
+            <label>Selecciona una forma:</label>
+            <input type="radio" id="triangulo" name="forma" value="triangulo" checked>
+            <label for="triangulo">Triángulo</label>
+            <input type="radio" id="rectangulo" name="forma" value="rectangulo">
+            <label for="rectangulo">Rectángulo</label>
+        </div>
+        
+        <div>
+            <label for="base">Introduce la base:</label>
+            <input type="number" id="base">
+        </div>
+        
+        <div>
+            <label for="altura">Introduce la altura:</label>
+            <input type="number" id="altura">
+        </div>
+        
+        <button id="calcular">Calcular</button>
+        
+        <div>
+            <label for="resultado">Resultado:</label>
+            <input type="text" id="resultado" readonly>
+        </div>
+        
+        <button id="borrar">Borrar</button>
+    </div>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
