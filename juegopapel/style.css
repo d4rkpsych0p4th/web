@@ -1,0 +1,37 @@
+body {
+    background-color: #000 !important;  /* Cambia el fondo de color según tus preferencias */
+    padding: 20px;
+}
+
+.container {
+    background-color: #808080;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centramos el contenido horizontalmente */
+}
+
+.winner {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+
+.result-img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto; /* Centramos la imagen horizontalmente */
+}
+.player-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.player {
+    margin-top: 20px;
+}
+
+.player img {
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra Papel Tijera</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm//bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Juego de Piedra, Papel o Tijera</h1>
+        <div class="form-group">
+            <label for="players">Número de jugadores (humanos):</label>
+            <select class="form-control" id="players">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" id="startBtn">Jugar</button>
+
+        <div class="mt-4 row players-container">
+            <div id="player1" class="col-md-6 player d-flex justify-content-center align-items-center">
+                <h3>Jugador 1</h3>
+                <img class="result-img" id="player1Img" />
+                <p>Victorias: <span id="player1Score">0</span></p>
+            </div>
+            <div id="player2" class="col-md-6 player d-flex justify-content-center align-items-center">
+                <h3>Jugador 2</h3>
+                <img class="result-img" id="player2Img" />
+                <p>Victorias: <span id="player2Score">0</span></p>
+            </div>
+        </div>
+        <button class="btn btn-danger mt-3" id="finishBtn">Finalizar</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
