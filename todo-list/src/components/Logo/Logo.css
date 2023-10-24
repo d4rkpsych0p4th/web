@@ -1,0 +1,13 @@
+/* Logo.css */
+
+.logo {
+    text-align: center;
+  }
+  
+  .logo img {
+    max-width: 100%; /* Asegura que la imagen no se desborde de su contenedor */
+    max-height: 100px; /* Establece una altura máxima para la imagen (ajusta según tus necesidades) */
+    display: block; /* Elimina cualquier espacio en blanco debajo de la imagen */
+    margin: 0 auto; /* Centra horizontalmente la imagen */
+  }
+  
