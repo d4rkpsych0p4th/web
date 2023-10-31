@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Dedos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Juego de Dedos</h1>
+        <div class="row">
+            <div class="col">
+                <h3>Configuración del Juego</h3>
+                <div class="form-group">
+                    <label for="playerCount">Número de Jugadores Humanos:</label>
+                    <select id="playerCount" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="roundCount">Número de Rondas (1-5):</label>
+                    <select id="roundCount" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <button id="startButton" class="btn btn-primary">Comenzar Juego</button>
+                <button id="resetButton" class="btn btn-danger" disabled>Reiniciar Juego</button>
+                <button id="hintButton" class="btn btn-info">Pista</button>
+
+            </div>
+        </div>
+        <div class="row" id="players">
+            <!-- Jugadores se crearán dinámicamente aquí -->
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="playButton" class="btn btn-success" disabled>Jugar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Resultados</h3>
+                <div id="results">
+                    <!-- Contadores de puntos se mostrarán aquí -->
+                   
+                </div>
+                <div id="round">Ronda 1</div>
+                <div id="player1Wins">Jugador 1 : 0 victorias</div>
+                <div id="player2Wins">Jugador 2 : 0 victorias</div>
+                <div id="player3Wins">Jugador 3 : 0 victorias</div>
+
+            </div>
+        </div>
+    </div>
+    <script src="javascript.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de dedos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid bg-dark text-center">
+        <h1>Juego de dedos</h1>
+        <div class="row">
+            <div class="col">
+                <h3>Jugador 1</h3>
+                <select id="player1Select" class="form-control">
+                    <option value="0">Mano cerrada</option>
+                    <option value="1">1 dedo</option>
+                    <option value="2">2 dedos</option>
+                </select>
+                <img id="player1Hand" src="hand-closed.png" class="hand-image">
+                <p>Victorias: <span id="player1Wins">0</span></p>
+            </div>
+            <div class="col">
+                <h3>Jugador 2</h3>
+                <select id="player2Select" class="form-control">
+                    <option value="0">Mano cerrada</option>
+                    <option value="1">1 dedo</option>
+                    <option value="2">2 dedos</option>
+                </select>
+                <img id="player2Hand" src="hand-closed.png" class="hand-image">
+                <p>Victorias: <span id="player2Wins">0</span></p>
+            </div>
+            <div class="col">
+                <h3>Jugador 3</h3>
+                <select id="player3Select" class="form-control">
+                    <option value="0">Mano cerrada</option>
+                    <option value="1">1 dedo</option>
+                    <option value="2">2 dedos</option>
+                </select>
+                <img id="player3Hand" src="hand-closed.png" class="hand-image">
+                <p>Victorias: <span id="player3Wins">0</span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="playButton" class="btn btn-primary">¡Jugar!</button>
+            </div>
+            <div class="col">
+                <h3>Ronda: <span id="round">1</span>/5</h3>
+                <p id="resultText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
