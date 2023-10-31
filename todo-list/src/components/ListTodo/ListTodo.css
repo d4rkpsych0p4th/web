@@ -1,0 +1,9 @@
+.list-todo {
+    background-color: #ccc; /* Color de fondo gris */
+    border-radius: 30px;   /* Esquinas redondeadas */
+    padding: 20px;         /* Espacio interno */
+    margin: 10px;          /* Margen exterior */
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }

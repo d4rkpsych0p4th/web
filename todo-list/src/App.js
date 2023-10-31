@@ -26,10 +26,8 @@ function App() {
 
   return (
     <div className="App">
-    <header className="Logo" alt="Logo">
     <Logo />
-    </header>
-  <div className="container">
+  <div className="list-todo">
      <h2>Mis Tareas</h2>
     <FormTodo addTask={addTask} />
     <ListTodo tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />
