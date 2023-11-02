@@ -1,7 +1,7 @@
 import React from 'react';
 import Note from './Note';
 
-function NoteList({ notes, deleteNote, searchTerm, setSearchTerm }) {
+function NoteList({ notes, deleteNote, searchTerm, setSearchTerm , handleEditNote }) {
   const filteredNotes = notes.filter(
     (note) =>
       note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -12,7 +12,7 @@ function NoteList({ notes, deleteNote, searchTerm, setSearchTerm }) {
     <div>
       <ul>
         {filteredNotes.map((note) => (
-          <Note key={note.id} note={note} deleteNote={deleteNote} />
+           <Note key={note.id} note={note} deleteNote={deleteNote} handleEditNote={handleEditNote} />
         ))}
       </ul>
     </div>

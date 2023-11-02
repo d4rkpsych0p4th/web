@@ -26,6 +26,14 @@ function App() {
     const updatedNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedNotes);
   };
+  const handleEditNote = (editedNote) => {
+    const updatedNotes = notes.map((note) =>
+      note.id === editedNote.id ? editedNote : note
+    );
+    setNotes(updatedNotes);
+  };
+  
+ 
 
   return (
     <div className="container-fluid text-left">
@@ -58,7 +66,8 @@ function App() {
     </div>
     <div className="row">
       <div className="col">
-        <NoteList notes={notes} deleteNote={deleteNote} searchTerm={searchTerm} />
+      <NoteList notes={notes} deleteNote={deleteNote} searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleEditNote={handleEditNote} // Asegúrate de que esté pasando handleEditNote
+/>
       </div>
     </div>
   </div>
