@@ -13,11 +13,6 @@ function App() {
     setNotes(savedNotes);
   }, []);
 
-  useEffect(() => {
-    // Guardar las notas en el almacenamiento local cada vez que cambien
-    localStorage.setItem('notes', JSON.stringify(notes));
-  }, [notes]);
-
   const addNote = (newNote) => {
     setNotes([...notes, newNote]);
   };
@@ -26,52 +21,61 @@ function App() {
     const updatedNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedNotes);
   };
+
   const handleEditNote = (editedNote) => {
     const updatedNotes = notes.map((note) =>
       note.id === editedNote.id ? editedNote : note
     );
     setNotes(updatedNotes);
   };
-  
- 
+
+  useEffect(() => {
+    // Guardar las notas en el almacenamiento local cada vez que cambien
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
 
   return (
     <div className="container-fluid text-left">
-    <div className="row">
-      <div className="col">
-        <h1 className="text-center">Aplicación de Notas</h1>
+      <div className="row">
+        <div className="col">
+          <h1 className="text-center">Aplicación de Notas</h1>
+        </div>
       </div>
-    </div>
-    <div className="row">
-      <div className="col">
-        <div className="input-group mb-2 mr-sm-2">
-          <div className="input-group-prepend">
-            <div className="input-group-text">Buscador</div>
+      <div className="row">
+        <div className="col">
+          <div className="input-group mb-2 mr-sm-2">
+            <div className="input-group-prepend">
+              <div className="input-group-text">Buscador</div>
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              id="search"
+              placeholder="Buscar notas"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            className="form-control"
-            id="search"
-            placeholder="Buscar notas"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <NoteEditor addNote={addNote} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <NoteList
+            notes={notes}
+            deleteNote={deleteNote}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleEditNote={handleEditNote}
           />
         </div>
       </div>
     </div>
-    <div className="row">
-      <div className="col">
-        <NoteEditor addNote={addNote} />
-      </div>
-    </div>
-    <div className="row">
-      <div className="col">
-      <NoteList notes={notes} deleteNote={deleteNote} searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleEditNote={handleEditNote} // Asegúrate de que esté pasando handleEditNote
-/>
-      </div>
-    </div>
-  </div>
-);
+  );
 }
 
 export default App;
