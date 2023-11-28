@@ -13,13 +13,10 @@ export default function Navbar() {
                     <Link href="/">Home</Link>
                 </li>
                 <li>
-                    <Link href="/about">About</Link>
+                    <Link href="/user">USERS</Link>
                 </li>
                 <li>
-                    <Link href="/users">USERS</Link>
-                </li>
-                <li>
-                    <Link href="/posts">Posts</Link>
+                    <Link href="/api/users">API</Link>
                 </li>
             </ul>
         </nav>
