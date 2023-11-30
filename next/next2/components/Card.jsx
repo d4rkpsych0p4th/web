@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 function Card({ user }) {
   return (
+    <Link href={`/user/${user.id}`} key={user.id}>
     <div className="card">
       <img src={user.avatar} alt={user.first_name} />
       <div className="card-body">
@@ -9,6 +10,7 @@ function Card({ user }) {
         <p>{user.email}</p>
       </div>
     </div>
+    </Link>
   );
 }
 
