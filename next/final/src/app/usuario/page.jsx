@@ -129,6 +129,7 @@ const Usuario = () => {
     
     <div>
     <div className="flex items-center justify-begin p-48"  style={{ backgroundImage: `url('/assets/santorini.jpg')`, backgroundSize: 'cover', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>
+    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
         <div className="bg-gray-200 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro Usuario</h2>
           <div className="mb-4">
@@ -192,12 +193,12 @@ const Usuario = () => {
           <div>
       <label>
         <input type="checkbox" id="default-checkbox" name="permiteOfertas" onChange={handleChange}
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+          className="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
         ¿Permitir ofertas?
       </label>
     </div>
     
-          <button onClick={handleSubmit} className="bg-blue-700 text-white py-2 px-4 rounded-md">
+          <button onClick={handleSubmit} className="bg-blue-500 text-white py-2 px-4 rounded-md">
             Submit
           </button>
           </div>
@@ -216,7 +217,7 @@ const Usuario = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="block w-full p-2 border rounded-md"
             />
-            <button onClick={handleSearch} className="bg-blue-700 text-white py-2 px-4 rounded-md mt-2">
+            <button onClick={handleSearch} className="bg-blue-500 text-white py-2 px-4 rounded-md mt-2">
               Buscar
             </button>
           </div>
