@@ -5,12 +5,12 @@ import React from 'react';
 const Login = () => {
   return (
   
-    <div className="flex h-screen items-center justify-end p-4"  style={{ backgroundImage: `url('/assets/hamburguer.jpg')`, backgroundSize: 'contain', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>    
+    <div className="flex h-screen items-center justify-end p-4"  style={{ backgroundImage: `url('/assets/hamburguer.jpg')`, backgroundSize: 'contain', backgroundPosition: 'left', width: '100vw', height: '100vh' }}>    
       <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
   
-      <div className="bg-gray-200 p-8 rounded-md shadow-md"style={{ width: '500px', height: '420px' }}>
-        <h2 className="text-2xl font-bold mb-4">BIENVENIDO A</h2>
-        <h3 className="text-2xl font-bold mb-4">GOURMET EXPLORER</h3>
+      <div className="bg-gray-200 opacity-90 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
+        <h2 className="text-2xl font-bold mb-4 opacity-100 ">BIENVENIDO A</h2>
+        <h3 className="text-2xl font-bold mb-4 opacity-100">GOURMET EXPLORER</h3>
         <div className="mb-4">
           <label>Email:</label>
           <input type="email" className="block w-full p-2 border rounded-md" />
