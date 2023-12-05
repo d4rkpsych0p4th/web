@@ -1,13 +1,12 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { NextResponse } from 'next/server';
 
 const Admin = () => {
   const [formData, setFormData] = useState({
     email: '',
     nombreComerciante: '',
     cif: '',
-    direccion: '',
+    ciudad: '',
     telefono: '',
     puntuacion: 0,
     comentario: [],
@@ -24,7 +23,7 @@ const Admin = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('');
+      const response = await fetch('user.txt');
       const data = await response.json();
       setStoredData(data);
     } catch (error) {
@@ -42,32 +41,36 @@ const Admin = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('', {
+      const response = await fetch('/merchant', {  // Assuming your serverless function is in the '/merchant' path
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
-      const updatedData = await response.json();
-      setStoredData(updatedData);
-      setFormData({
-        email: '',
-        nombreComerciante: '',
-        cif: '',
-        ciudad: '',
-        telefono: '',
-        puntuacion: 0,
-        comentario: [],
-      });
-
-      alert('Datos guardados exitosamente');
+  
+      if (response.ok) {
+        alert('Datos guardados exitosamente');
+        // Optionally, reset the form data after a successful request
+        setFormData({
+          email: '',
+          nombreComerciante: '',
+          cif: '',
+          ciudad: '',
+          telefono: '',
+          puntuacion: 0,
+          comentario: [],
+        });
+      } else {
+        console.error(`HTTP error! Status: ${response.status}`);
+        alert('Error al guardar los datos');
+      }
     } catch (error) {
       console.error(error);
       alert('Error al guardar los datos');
     }
   };
+  
 
   const handleSearch = () => {
     // Filtrar los comercios basados en el término de búsqueda
@@ -76,7 +79,7 @@ const Admin = () => {
         comercio.nombreComerciante.toLowerCase().includes(searchTerm.toLowerCase()) ||
         comercio.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
         comercio.cif.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comercio.direccion.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        comercio.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
         comercio.telefono.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -118,11 +121,11 @@ const Admin = () => {
               className="block w-full p-2 border rounded-md"
             />
           </div><div className="mb-4">
-            <label>Direccion</label>
+            <label>Ciudad</label>
             <input
               type="text"
-              name="direccion"
-              value={formData.direccion}
+              name="ciudad"
+              value={formData.ciudad}
               onChange={handleChange}
               className="block w-full p-2 border rounded-md"
             />

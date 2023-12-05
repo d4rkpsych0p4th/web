@@ -1,11 +1,9 @@
 import Login from '../app/components/Login';
-import Image from 'next/image'
+import React from 'react';
+
+
 export default function Home(){
   return (
-    
-    <div >
-     
       <Login />
-      </div>
   );
 }

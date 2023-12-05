@@ -11,9 +11,10 @@ async function Page({ params }) {
   const user = await loadUser(params.id);
   return (
     <div>
+    
       <h1>Usuario:{user.first_name} id: {params.id}</h1>
         <Card user={user} />
-      
+        
     </div>
   );
 }

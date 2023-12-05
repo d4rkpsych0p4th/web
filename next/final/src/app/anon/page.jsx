@@ -39,42 +39,41 @@ const Anon = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    // Aquí guardamos los datos del usuario en localStorage o en un archivo JSON
-    const updatedData = [...storedData, formData];
-    localStorage.setItem('usuarioData', JSON.stringify(updatedData));
-  
-    // Actualizar el estado de los datos almacenados y limpiar el formulario
-    setStoredData(updatedData);
-    setFormData({
-      email: '',
-      nombre: '',
-      password: '',
-      edad: '',
-      ciudad: '',
-      intereses: '',
-      permiteoferatas: false,
-      puntuacion: 0,
-      comentario: [],
-    });
-  
-    alert('Datos de usuario guardados exitosamente');
-  };
-    const handleSubmit1 = () => {
-      // Aquí guardamos los datos del administrador en localStorage o en un archivo JSON
-      const updatedData1 = [...storedData1, formData];
-      localStorage.setItem('adminData', JSON.stringify(updatedData1));
-    
-      // Actualizar el estado de los datos almacenados y limpiar el formulario
-      setStoredData1(updatedData1);
-      setFormData({
-        puntuacion: 0,
-        comentario: [],
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('/merchant', {  // Assuming your serverless function is in the '/merchant' path
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    
-      alert('Datos de administrador guardados exitosamente');
-    };
-
+  
+      if (response.ok) {
+        alert('Datos guardados exitosamente');
+        // Optionally, reset the form data after a successful request
+        setFormData({
+          email: '',
+          nombre: '',
+          password: '',
+          edad: '',
+          ciudad: '',
+          intereses: '',
+          permiteoferatas: false,
+          puntuacion: 0,
+          comentario: [],
+     
+        });
+      } else {
+        console.error(`HTTP error! Status: ${response.status}`);
+        alert('Error al guardar los datos');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error al guardar los datos');
+    }
+  }; 
+  
   const handleSearch = () => {
     // Filtrar los comercios basados en el término de búsqueda
     
