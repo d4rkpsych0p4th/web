@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { readFileSync, writeFileSync} from 'fs';
+import { NextResponse } from 'next/server';
 
 const Admin = () => {
   const [formData, setFormData] = useState({
@@ -9,8 +9,8 @@ const Admin = () => {
     cif: '',
     direccion: '',
     telefono: '',
-    //puntuacion: 0,
-    //comentario: [],
+    puntuacion: 0,
+    comentario: [],
   });
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,27 +21,16 @@ const Admin = () => {
     // Obtener datos almacenados al cargar el componente
     fetchData();
   }, []);
-  const filePath = 'assets/users.txt';
+
   const fetchData = async () => {
     try {
-      const data = await readFileSync(filePath, 'utf-8');
-      setStoredData(data);
-      // Hacer algo con los datos leídos, si es necesario
-    } catch (error) {
-      // Manejar errores de lectura
-      console.error('Error al leer el archivo:', error);
-    }
-  };
-  /*const fetchData = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/adminData');
+      const response = await fetch('');
       const data = await response.json();
       setStoredData(data);
     } catch (error) {
       console.error(error);
     }
-
-  };*/
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,32 +39,32 @@ const Admin = () => {
       [name]: value,
     }));
   };
-  
 
   const handleSubmit = async () => {
     try {
-      // Realizar alguna lógica de manipulación de datos según tus necesidades
-      const newData = {
+      const response = await fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const updatedData = await response.json();
+      setStoredData(updatedData);
+      setFormData({
         email: '',
         nombreComerciante: '',
         cif: '',
-        direccion: '',
+        ciudad: '',
         telefono: '',
-        //puntuacion: 0,
-        //comentario: [],
-      };
-  
-      // Guardar datos en el archivo
-      await writeFileSync(filePath, JSON.stringify(newData), 'utf-8');
-  
-      // Puedes leer el archivo nuevamente después de escribirlo, si es necesario
-      await fetchData();
-  
-      // Resto de la lógica después de guardar
+        puntuacion: 0,
+        comentario: [],
+      });
+
       alert('Datos guardados exitosamente');
     } catch (error) {
-      // Manejar errores de escritura
-      console.error('Error al escribir en el archivo:', error);
+      console.error(error);
       alert('Error al guardar los datos');
     }
   };
@@ -97,7 +86,6 @@ const Admin = () => {
     
     <div>
     <div className="flex items-center justify-begin p-48"  style={{ backgroundImage: `url('/assets/fondo-admin.jpg')`, backgroundSize: 'contain', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>
-    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
         <div className="bg-gray-200 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro Comerciante</h2>
           <div className="mb-4">
@@ -148,7 +136,7 @@ const Admin = () => {
               className="block w-full p-2 border rounded-md"
             />
           </div>
-          <button onClick={handleSubmit} className="bg-blue-500 text-white py-2 px-4 rounded-md">
+          <button onClick={handleSubmit} className="bg-blue-700 text-white py-2 px-4 rounded-md">
             Submit
           </button>
           </div>
@@ -165,7 +153,7 @@ const Admin = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="block w-full p-2 border rounded-md"
             />
-            <button onClick={handleSearch} className="bg-blue-500 text-white py-2 px-4 rounded-md mt-2">
+            <button onClick={handleSearch} className="bg-blue-700 text-white py-2 px-4 rounded-md mt-2">
               Buscar
             </button>
           </div>
