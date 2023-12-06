@@ -90,13 +90,15 @@ const Admin = () => {
   const backgroundImageStyle = {
     backgroundImage: `url('/assets/fondo-admin.jpg')`,
     backgroundSize: 'cover', // Adjust as needed
-    backgroundPosition: 'bottom', // Adjust as needed
+    backgroundPosition: 'center', // Adjust as needed
     width: 'auto',
     height: 'auto',
   };
   return (
     
-    <div className="flex items-center justify-begin" style={backgroundImageStyle} >
+
+    <div className="flex items-center h-screen justify-begin h-screen" style={backgroundImageStyle} >
+     
 
         <div className="flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">  
           <h2 className="text-2xl font-bold mb-4">Registro Comerciante</h2>
@@ -192,6 +194,7 @@ const Admin = () => {
     </div>
     </div>
   
+ 
   );
 };
 
