@@ -7,7 +7,7 @@ export async function GET(request, {params}) {
     //console.log(serachParams)
     //serachParams.get('nombre')
     //serachParams.get('apellido')
-    const res = await fetch(`https://jsonplaceholder.typicode.com/merchant/${params.id}`)
+    const res = await fetch(`http://localhost:3000/merchant/${params.id}`)
     const data = await res.json()
 
     return NextResponse.json({data})

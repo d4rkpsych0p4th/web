@@ -1,9 +1,39 @@
 "use client"
 // src/components/Login.js
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
- 
+  const router = useRouter()
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const redirigir = (code) => {
+      console.log("Code", code)
+      if (code == 200) {
+          router.push("/inicio")
+      }
+  }
+
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      const user = {
+          email: email,
+          password: password,
+      }
+
+      fetch("/api/user", {
+          method: "POST",
+          headers: {
+          //Authorization: `Bearer ${tokenJWT}`
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user)
+      })
+         .then((res) => res.json())
+         .then((data) => redirigir(data.status))
+  }
 
 
   const backgroundImageStyle = {
@@ -18,7 +48,7 @@ const Login = () => {
     <div className="flex h-screen items-center justify-end p-4" style={backgroundImageStyle}>
       <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
   
-      <div className="bg-gray-200 opacity-90 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
+      <div className="bg-gray-200 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
         <h2 className="text-2xl font-bold mb-4 opacity-100 ">BIENVENIDO A</h2>
         <h3 className="text-2xl font-bold mb-4 opacity-100">GOURMET EXPLORER</h3>
         <div className="mb-4">
@@ -29,7 +59,7 @@ const Login = () => {
           <label>Password:</label>
           <input type="password" className="block w-full p-2 border rounded-md" />
         </div>
-         <button className="bg-blue-500 text-white py-2 px-4 rounded-md font-bold">Login</button>
+         <button  onClick={handleSubmit} className="bg-blue-500 text-white py-2 px-4 rounded-md font-bold">Login</button>
 
 
 

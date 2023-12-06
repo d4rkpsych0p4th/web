@@ -9,9 +9,7 @@ const Usuario = () => {
     edad: '',
     ciudad: '',
     intereses: '',
-    permiteoferatas: false,
-    puntuacion: 0,
-    comentario: [],
+    permiteofertas: '',
   });
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,17 +17,22 @@ const Usuario = () => {
   const [storedData, setStoredData] = useState([]);
   const [storedData1, setStoredData1] = useState([]);
 
+
   useEffect(() => {
-    // Obtene datos almacenados al cargar el componente
-    const storedData = JSON.parse(localStorage.getItem('usuarioData')) || [];
-    setStoredData(storedData);
-  }, []);
-  useEffect(() => {
-    const adminData = JSON.parse(localStorage.getItem('adminData')) || [];
-    
-    setStoredData1(adminData);
+    // Obtener datos almacenados al cargar el componente
+    fetchData();
   }, []);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api/merchant');
+      const data = await response.json();
+      //console.log(data.users); // Adjust the property based on your actual response structure
+      setStoredData(data.users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -37,99 +40,67 @@ const Usuario = () => {
       [name]: type === 'checkbox' ? checked : value, // Manejar el checkbox de manera diferente
     }));
   };
-
-  const handleSubmit = () => {
-    // Aquí guardamos los datos del usuario en localStorage o en un archivo JSON
-    const updatedData = [...storedData, formData];
-    localStorage.setItem('usuarioData', JSON.stringify(updatedData));
-  
-    // Actualizar el estado de los datos almacenados y limpiar el formulario
-    setStoredData(updatedData);
-    setFormData({
-      email: '',
-      nombre: '',
-      password: '',
-      edad: '',
-      ciudad: '',
-      intereses: '',
-      permiteoferatas: false,
-      puntuacion: 0,
-      comentario: [],
-    });
-  
-    alert('Datos de usuario guardados exitosamente');
-  };
-    const handleSubmit1 = () => {
-      // Aquí guardamos los datos del administrador en localStorage o en un archivo JSON
-      const updatedData1 = [...storedData1, formData];
-      localStorage.setItem('adminData', JSON.stringify(updatedData1));
-    
-      // Actualizar el estado de los datos almacenados y limpiar el formulario
-      setStoredData1(updatedData1);
-      setFormData({
-        puntuacion: 0,
-        comentario: [],
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/user', {  // Assuming your serverless function is in the '/merchant' path
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    
-      alert('Datos de administrador guardados exitosamente');
-    };
-
+  
+      if (response.ok) {
+        alert('Datos guardados exitosamente');
+        // Optionally, reset the form data after a successful request
+        setFormData({
+          email: '',
+          nombre: '',
+          password: '',
+          edad: '',
+          ciudad: '',
+          intereses: '',
+          permiteoferatas: false,
+          puntuacion: 0,
+          comentario: [],
+        });
+        fetchData(); // Refetch data after submission
+      } else {
+        console.error(`HTTP error! Status: ${response.status}`);
+        alert('Error al guardar los datos');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error al guardar los datos');
+    }
+  };  
   const handleSearch = () => {
-    // Filtrar los comercios basados en el término de búsqueda
-    
-    const filteredResults = storedData1.filter(
+    const filteredResults = storedData.filter(
       (comercio) =>
         comercio.nombreComerciante.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comercio.direccion.toLowerCase().includes(searchTerm.toLowerCase()) 
-        
+        comercio.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        comercio.cif.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        comercio.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        comercio.telefono.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     setFilteredData(filteredResults);
   };
-
+ 
   
-  const handlePuntuacionChange = (e, index) => {
-    const newPuntuacion = parseInt(e.target.value, 10);
-    setStoredData1((prevData) => {
-      const updatedData1 = [...prevData];
-      updatedData1[index].puntuacion = newPuntuacion;
-      return updatedData1;
-    });
+  const backgroundImageStyle = {
+    backgroundImage: `url('/assets/santorini.jpg')`,
+    backgroundSize: 'cover', // Adjust as needed
+    backgroundPosition: 'bottom', // Adjust as needed
+    width: '100vw',
+    height: '100vh',
   };
-
-  const handleGuardarPuntuacion = (index) => {
-    setStoredData1((prevData) => {
-      const updatedData1 = [...prevData];
-      updatedData1[index].puntuacion = updatedData1[index].nuevaPuntuacion;
-      return updatedData1;
-    });
-  };
-
-  const handleComentarioChange = (e, index) => {
-    const nuevoComentario = e.target.value;
-    setStoredData1((prevData) => {
-      const updatedData1 = [...prevData];
-      updatedData1[index].comentario = nuevoComentario;
-      return updatedData1;
-    });
-  };
-
-  const handleGuardarComentario = (index) => {
-    setStoredData1((prevData) => {
-      const updatedData1 = [...prevData];
-      const nuevoComentario = updatedData1[index].nuevoComentario || [];
-      nuevoComentario.push(updatedData1[index].comentario);
-      updatedData1[index].nuevoComentario = nuevoComentario;
-      return updatedData1;
-    });
-  };
-  
-
   return (
     
     <div>
-    <div className="flex items-center justify-begin p-48"  style={{ backgroundImage: `url('/assets/santorini.jpg')`, backgroundSize: 'cover', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>
-    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
+    <div className="flex items-center justify-begin p-48"  style={backgroundImageStyle}>
+    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
+
         <div className="bg-gray-200 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro Usuario</h2>
           <div className="mb-4">
@@ -192,7 +163,7 @@ const Usuario = () => {
           </div>
           <div>
       <label>
-        <input type="checkbox" id="default-checkbox" name="permiteOfertas" onChange={handleChange}
+        <input type="checkbox" id="default-checkbox" name="permiteofertas" onChange={handleChange}
           className="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
         ¿Permitir ofertas?
       </label>
@@ -224,38 +195,23 @@ const Usuario = () => {
           <div className="mt-4">
             <h3>Comercios Guardados:</h3>
             <ul>
-            {filteredData.length > 0 ? (
-            filteredData.map((comercio, index) => (
-              <li key={index}>
-                <strong>{comercio.nombreComerciante}</strong>
-                <p>Puntuación: {comercio.puntuacion}</p>
-                <p>Comentarios: {comercio.comentario ? comercio.comentario.join(', ') : 'Sin comentarios'}</p>
-                <div>
-                  <label>Puntuar:</label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="5"
-                    value={comercio.nuevaPuntuacion || 0}
-                    onChange={(e) => handlePuntuacionChange(e, index)}
-                  />
-                  <button onClick={() => handleGuardarPuntuacion(index)}>Guardar</button>
-                </div>
-                <div>
-                  <label>Comentar:</label>
-                  <input
-                    type="text"
-                    value={comercio.nuevoComentario}
-                    onChange={(e) => handleComentarioChange(e, index) || ''}
-                  />
-                  <button onClick={() => handleGuardarComentario(index)}>Guardar</button>
-                </div>
-              </li>
+                          {filteredData.length > 0 ? (
+                filteredData.map((comercio, index) => (
+                  <li key={index}>
+                    {comercio.nombreComerciante && <p>Nombre: {comercio.nombreComerciante}</p>}
+                    {comercio.direccion && <p>Dirección: {comercio.direccion}</p>}
+                    {comercio.telefono && <p>Teléfono: {comercio.telefono}</p>}
+                    {comercio.puntuacion !== undefined && <p>Puntuacion: {comercio.puntuacion}</p>}
+                    {comercio.comentario && Array.isArray(comercio.comentario) && (
+                      <p>Comentario: {comercio.comentario.join(', ')}</p>
+                    )}
+                  </li>
                   ))
                 ) : (
                   <p>No hay resultados</p>
                 )}
                 </ul>
+                
             </div>
           </div>
         </div>

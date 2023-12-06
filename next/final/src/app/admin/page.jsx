@@ -23,14 +23,15 @@ const Admin = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('user.txt');
+      const response = await fetch('/api/merchant');
       const data = await response.json();
-      setStoredData(data);
+      //console.log(data.users); // Adjust the property based on your actual response structure
+      setStoredData(data.users);
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -41,7 +42,7 @@ const Admin = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/merchant', {  // Assuming your serverless function is in the '/merchant' path
+      const response = await fetch('http://localhost:3000/api/merchant', {  // Assuming your serverless function is in the '/merchant' path
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,6 +62,7 @@ const Admin = () => {
           puntuacion: 0,
           comentario: [],
         });
+        fetchData(); // Refetch data after submission
       } else {
         console.error(`HTTP error! Status: ${response.status}`);
         alert('Error al guardar los datos');
@@ -73,7 +75,6 @@ const Admin = () => {
   
 
   const handleSearch = () => {
-    // Filtrar los comercios basados en el término de búsqueda
     const filteredResults = storedData.filter(
       (comercio) =>
         comercio.nombreComerciante.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -85,10 +86,19 @@ const Admin = () => {
 
     setFilteredData(filteredResults);
   };
+  const backgroundImageStyle = {
+    backgroundImage: `url('/assets/fondo-admin.jpg')`,
+    backgroundSize: 'contain', // Adjust as needed
+    backgroundPosition: 'bottom', // Adjust as needed
+    width: '100vw',
+    height: '100vh',
+  };
   return (
     
     <div>
-    <div className="flex items-center justify-begin p-48"  style={{ backgroundImage: `url('/assets/fondo-admin.jpg')`, backgroundSize: 'contain', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>
+    <div className="flex items-center justify-begin p-48" style={backgroundImageStyle} >
+    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
+
         <div className="bg-gray-200 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro Comerciante</h2>
           <div className="mb-4">
@@ -138,6 +148,9 @@ const Admin = () => {
               onChange={handleChange}
               className="block w-full p-2 border rounded-md"
             />
+            <div  name="puntuacion"value={formData.puntuacion}></div>
+            <div  name="comentario"value={formData.comentario}></div>
+
           </div>
           <button onClick={handleSubmit} className="bg-blue-700 text-white py-2 px-4 rounded-md">
             Submit
@@ -166,7 +179,9 @@ const Admin = () => {
                 {filteredData.length > 0 ? (
                 filteredData.map((comercio, index) => (
                   <li key={index}>
-                    Nombre: {comercio.nombreComerciante} Direccion: {comercio.direccion} Telefono: {comercio.telefono}
+                   <p>Nombre: {comercio.nombreComerciante}</p>
+                    <p>Ciudad: {comercio.ciudad} </p>
+                    <p>Telefono: {comercio.telefono}</p>
                     {comercio.puntuacion !== undefined && <p>Puntuación: {comercio.puntuacion}</p>}
                     {comercio.comentario && Array.isArray(comercio.comentario) && (
                       <p>Comentario: {comercio.comentario.join(', ')}</p>

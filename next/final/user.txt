@@ -1,1 +1,1 @@
-[{"nombre":"Ric","apellido":"Pal"},{"nombre":"Ric","apellido":"Pal"},{"nombre":"Ric","apellido":"Pal"}]
+[{"email":"eeee","nombreComerciante":"eeeeee","cif":"eeeee","ciudad":"eeeeee","telefono":"eeeeee","puntuacion":0,"comentario":[]},{"email":"eeee","nombreComerciante":"eeeeee","cif":"eeeee","ciudad":"eeeeee","telefono":"eeeeee","puntuacion":0,"comentario":[]}]

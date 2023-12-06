@@ -1,13 +1,12 @@
 "use client"
-import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import UserCard from '../components/MerchCard';
 
-const Anon = () => {
+const commerce = () => {
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
-  const [loading, setLoading] = useState(true); // Mover la declaración aquí
 
   useEffect(() => {
     // Obtener datos almacenados al cargar el componente
@@ -18,36 +17,36 @@ const Anon = () => {
     try {
       const response = await fetch('/api/merchant');
       const data = await response.json();
+      //console.log(data.users); // Adjust the property based on your actual response structure
       setStoredData(data.users);
-      setLoading(false); // Marcar que los datos se han cargado
     } catch (error) {
       console.error(error);
-      setLoading(false); // Marcar que los datos se han cargado incluso en caso de error
     }
   };
-
+  
   const handleSearch = () => {
-    const filteredResults = storedData.filter(
-      (comercio) =>
-        comercio.nombreComerciante.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comercio.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comercio.cif.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comercio.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comercio.telefono.toLowerCase().includes(searchTerm.toLowerCase())
+    // Filtrar los usuarios basados en el término de búsqueda
+    const filteredResults = storedData.filter((comercio) =>
+      Object.values(comercio).some(
+        (value) =>
+          typeof value === "string" && value.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     );
-
+  
     setFilteredData(filteredResults);
   };
 
   const backgroundImageStyle = {
-    backgroundImage: `url('/assets/copas.jpg')`,
-    backgroundSize: 'contain', // Ajustar según sea necesario
-    backgroundPosition: 'bottom', // Ajustar según sea necesario
+    backgroundImage: `url('/assets/green.png')`,
+    backgroundSize: 'cover', // Adjust as needed
+    backgroundPosition: 'bottom', // Adjust as needed
     width: '100vw',
     height: '100vh',
   };
 
   return (
+    
+    
     <div className="flex items-center justify-begin p-48" style={backgroundImageStyle} >
     <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
           
@@ -82,15 +81,9 @@ const Anon = () => {
           </div>
         )}
       </div>
-      <div className="mt-4 justify-begin px-20">
-        <Link href="/usuario" className="bg-green-500 text-white py-4 px-8 rounded-md text-xl font-bold">Regístrate
-        </Link>
-      </div>
     </div>
-      
-  
-      
   );
 };
 
-export default Anon;
+
+export default commerce;

@@ -1,40 +1,37 @@
 "use client"
 import React, { useState, useEffect,useRef } from 'react';
-
+import UserCard from '../components/UserCard';
 const Usuario = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    nombre: '',
-    password: '',
-    edad: '',
-    ciudad: '',
-    intereses: '',
-    permiteoferatas: false,
-    puntuacion: 0,
-    comentario: [],
-  });
-
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
-  const [storedData1, setStoredData1] = useState([]);
 
   useEffect(() => {
-    // Obtene datos almacenados al cargar el componente
-    const storedData = JSON.parse(localStorage.getItem('usuarioData')) || [];
-    setStoredData(storedData);
+    // Obtener datos almacenados al cargar el componente
+    fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api/user');
+      const data = await response.json();
+      //console.log(data.users); // Adjust the property based on your actual response structure
+      setStoredData(data.users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   const handleSearch = () => {
-    // Filtrar los comercios basados en el término de búsqueda
-    
-    const filteredResults = storedData.filter(
-      (Usuario) =>
-        Usuario.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        Usuario.intereses.toLowerCase().includes(searchTerm.toLowerCase()) 
-        
+    // Filtrar los usuarios basados en el término de búsqueda
+    const filteredResults = storedData.filter((usuario) =>
+      Object.values(usuario).some(
+        (value) =>
+          typeof value === "string" && value.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     );
-
+  
     setFilteredData(filteredResults);
   };
 
@@ -52,16 +49,20 @@ const Usuario = () => {
   };
 
 
-  
-
-  
-  
+  const backgroundImageStyle = {
+    backgroundImage: `url('/assets/green.png')`,
+    backgroundSize: 'cover', // Adjust as needed
+    backgroundPosition: 'bottom', // Adjust as needed
+    width: '100vw',
+    height: '100vh',
+  };
 
   return (
     
-    <div>
-    <div className="flex items-center justify-begin p-48"  style={{ backgroundImage: `url('/assets/green.png')`, backgroundSize: 'cover', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>
-    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
+    
+    <div className="flex items-center justify-begin p-48" style={backgroundImageStyle} >
+    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
+    
     <div className="bg-gray-300 p-8 rounded-md shadow-md md:w-96">
   <h2 className="text-2xl font-bold mb-4">Editar Comercio</h2>
   <div className="mb-4">
@@ -127,9 +128,7 @@ const Usuario = () => {
 </div>;
           
 
-
-
-          <div className="flex h-screen items-center justify-end p-8 ">
+<div className="flex h-screen items-center justify-end p-8 ">
         <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
           <h2 className="text-2xl font-bold mb-4">Busqueda de Usuario</h2>
           <div className="mt-4">
@@ -144,31 +143,24 @@ const Usuario = () => {
               Buscar
             </button>
           </div>
-          <div className="mt-4">
-            <h3>Usuarios Guardados:</h3>
-            <ul>
-            {filteredData.length > 0 ? (
-            filteredData.map((comercio, index) => (
-              <li key={index}>
-                <strong>{Usuario.nombre}</strong>
-                <p>Email: {Usuario.email }</p>
-                <p>Edad: {Usuario.edad}</p>
-                <p>Ciudad: {Usuario.Ciudad }</p>
-                <p>Recibir Ofertas: {Usuario.permiteOfertas ? 'Quiere Recibir Ofertas' : 'No Quiere Recibir Ofertas'}</p>
-                <p>Intereses: {Usuario.intereses}</p>
-              </li>
-                  ))
-                ) : (
-                  <p>No hay resultados</p>
-                )}
-                </ul>
-            </div>
-          </div>
         </div>
-      </div>  
       </div>
-      
+
+      {/* Card list outside the search box container */}
+      <div className="card-list">
+        {filteredData.length > 0 ? (
+          filteredData.map((usuario, index) => (
+            <UserCard key={index} user={usuario} />
+          ))
+        ) : (
+          <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
+          <p>No hay resultados</p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
+
 
 export default Usuario;
