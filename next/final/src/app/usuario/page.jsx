@@ -1,5 +1,7 @@
 "use client"
+
 import React, { useState, useEffect } from 'react';
+import UserCard from '../components/MerchCard';
 
 const Usuario = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +17,7 @@ const Usuario = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
-  const [storedData1, setStoredData1] = useState([]);
+
 
 
   useEffect(() => {
@@ -92,16 +94,14 @@ const Usuario = () => {
     backgroundImage: `url('/assets/santorini.jpg')`,
     backgroundSize: 'cover', // Adjust as needed
     backgroundPosition: 'bottom', // Adjust as needed
-    width: '100vw',
-    height: '100vh',
+    width: 'auto',
+    height: 'auto',
   };
   return (
-    
-    <div>
-    <div className="flex items-center justify-begin p-48"  style={backgroundImageStyle}>
-    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
+  
+    <div className="flex items-center justify-begin"  style={backgroundImageStyle}>
 
-        <div className="bg-gray-200 p-8 rounded-md shadow-md">
+        <div className=" flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro Usuario</h2>
           <div className="mb-4">
             <label>Email:</label>
@@ -176,12 +176,11 @@ const Usuario = () => {
           
 
 
-
           <div className="flex h-screen items-center justify-end p-8">
         <div className="bg-gray-200 p-8 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Busqueda de Comerciante</h2>
+          <h2 className="text-2xl font-bold mb-4">Busqueda Comerciante</h2>
           <div className="mt-4">
-            <label>Buscar Comercio:</label>
+          <label>Buscar Comercio:</label>
             <input
               type="text"
               value={searchTerm}
@@ -192,32 +191,26 @@ const Usuario = () => {
               Buscar
             </button>
           </div>
-          <div className="mt-4">
-            <h3>Comercios Guardados:</h3>
-            <ul>
-                          {filteredData.length > 0 ? (
-                filteredData.map((comercio, index) => (
-                  <li key={index}>
-                    {comercio.nombreComerciante && <p>Nombre: {comercio.nombreComerciante}</p>}
-                    {comercio.direccion && <p>Dirección: {comercio.direccion}</p>}
-                    {comercio.telefono && <p>Teléfono: {comercio.telefono}</p>}
-                    {comercio.puntuacion !== undefined && <p>Puntuacion: {comercio.puntuacion}</p>}
-                    {comercio.comentario && Array.isArray(comercio.comentario) && (
-                      <p>Comentario: {comercio.comentario.join(', ')}</p>
-                    )}
-                  </li>
-                  ))
-                ) : (
-                  <p>No hay resultados</p>
-                )}
-                </ul>
-                
-            </div>
-          </div>
         </div>
-      </div>  
-      </div>
       
+     
+      <div>
+      {/* Card list outside the search box container */}
+      <div className="sticky top-0 ml-3 card-list ">
+        {filteredData.length > 0 ? (
+          filteredData.map((comercio, index) => (
+            <UserCard key={index} merchant={comercio} />
+          ))
+        ) : (
+          <div className="bg-gray-200 hidden rounded-md shadow-md">
+            <p>No hay resultados</p>
+          </div>
+        )}
+      </div>
+      </div>
+    </div>
+    </div>
+  
   );
 };
 

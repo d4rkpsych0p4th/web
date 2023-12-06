@@ -1,6 +1,8 @@
 "use client"
+import Image from 'next/image';
 import React, { useState, useEffect,useRef } from 'react';
 import UserCard from '../components/UserCard';
+
 const Usuario = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,17 +55,16 @@ const Usuario = () => {
     backgroundImage: `url('/assets/green.png')`,
     backgroundSize: 'cover', // Adjust as needed
     backgroundPosition: 'bottom', // Adjust as needed
-    width: '100vw',
-    height: '100vh',
+    width: 'auto',
+    height: 'auto',
   };
 
   return (
     
     
-    <div className="flex items-center justify-begin p-48" style={backgroundImageStyle} >
-    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
-    
-    <div className="bg-gray-300 p-8 rounded-md shadow-md md:w-96">
+    <div className="flex items-center justify-begin" style={backgroundImageStyle} >
+          
+    <div className="flex flex-col bg-gray-300 p-8 ml-20 rounded-md shadow-md">
   <h2 className="text-2xl font-bold mb-4">Editar Comercio</h2>
   <div className="mb-4">
     <label>Ciudad:</label>
@@ -147,13 +148,13 @@ const Usuario = () => {
       </div>
 
       {/* Card list outside the search box container */}
-      <div className="card-list">
+      <div className="flex flex-col flex-fil card-list">
         {filteredData.length > 0 ? (
           filteredData.map((usuario, index) => (
             <UserCard key={index} user={usuario} />
           ))
         ) : (
-          <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
+          <div className="bg-gray-200 p-8 hidden rounded-md shadow-md md:w-96">
           <p>No hay resultados</p>
           </div>
         )}

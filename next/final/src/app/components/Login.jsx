@@ -1,22 +1,22 @@
 "use client"
+import Image from 'next/image';
 import Link from 'next/link';
 // src/components/Login.js
-
+import styles from './styles.css';
 const Login = () => {
  
   const backgroundImageStyle = {
-    backgroundImage: `url('/assets/hamburguer.jpg')`,
+    backgroundImage: `url('/assets/hamburguer2.jpg')`,
     backgroundSize: 'contain', // Adjust as needed
-    backgroundPosition: 'center', // Adjust as needed
+    backgroundPosition: 'bottom', // Adjust as needed
     width: '100vw',
     height: '100vh',
   };
   return (
   
-    <div className="flex items-center justify-end p-48" style={backgroundImageStyle}>
-      <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto'}}/>
-  
-      <div className="bg-gray-200 p-8 rounded-md shadow-md items-center w-96 h-200">
+    <div className="flex items-center justify-end" style={backgroundImageStyle}>
+        
+      <div className="bg-gray-200 p-8 rounded-md mr-20 shadow-md items-center w-96 h-200">
         <h2 className="text-2xl font-bold mb-4 ">BIENVENIDO A</h2>
         <h3 className="text-2xl font-bold mb-4">GOURMET EXPLORER</h3>
         <div className="mb-4">
@@ -56,8 +56,10 @@ const Login = () => {
             </ul>
         </div>
         </div>
-        
+      
       </div>
+    
+
     </div>
   );
 };

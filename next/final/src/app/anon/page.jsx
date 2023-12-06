@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import UserCard from '../components/MerchCard';
@@ -43,17 +44,19 @@ const Anon = () => {
     backgroundImage: `url('/assets/copas.jpg')`,
     backgroundSize: 'contain', // Ajustar según sea necesario
     backgroundPosition: 'bottom', // Ajustar según sea necesario
-    width: '100vw',
-    height: '100vh',
+    width: 'auto',
+    height: 'auto',
   };
 
   return (
-    <div className="flex items-center justify-begin p-48" style={backgroundImageStyle} >
-    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', right: '10px', width: '500px', height: 'auto',}}/>
-          
-
-<div className="flex h-screen items-center justify-end p-8 ">
-        <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
+    <div className="flex flex-col items-center p-8" style={backgroundImageStyle}>
+      <div className="flex h-screen items-center justify-end">
+      <div className="mt-4  md:mt-0 px-8">
+        <Link href="/usuario" className=" sticky top-0 bg-green-500 text-white py-4 px-8 rounded-md text-xl font-bold">
+          Regístrate
+        </Link>
+      </div>
+        <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96 my-1">
           <h2 className="text-2xl font-bold mb-4">Busqueda de Comercio</h2>
           <div className="mt-4">
             <label>Buscar Comercio:</label>
@@ -68,28 +71,25 @@ const Anon = () => {
             </button>
           </div>
         </div>
-      </div>
-
+      
+     
+      <div>
       {/* Card list outside the search box container */}
-      <div className="card-list">
+      <div className="flex flex-col flex-fil card-list ml-3">
         {filteredData.length > 0 ? (
           filteredData.map((comercio, index) => (
             <UserCard key={index} merchant={comercio} />
           ))
         ) : (
-          <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
-          <p>No hay resultados</p>
+          <div className="bg-gray-200 hidden rounded-md shadow-md">
+            <p>No hay resultados</p>
           </div>
         )}
       </div>
-      <div className="mt-4 justify-begin px-20">
-        <Link href="/usuario" className="bg-green-500 text-white py-4 px-8 rounded-md text-xl font-bold">Regístrate
-        </Link>
       </div>
     </div>
-      
+    </div>
   
-      
   );
 };
 
