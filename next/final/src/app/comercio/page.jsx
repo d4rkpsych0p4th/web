@@ -8,7 +8,7 @@ const Usuario = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
-
+  const [photoUrl, setPhotoUrl] = useState('');
   useEffect(() => {
     // Obtener datos almacenados al cargar el componente
     fetchData();
@@ -50,7 +50,16 @@ const Usuario = () => {
     console.log('Selected File:', selectedFile);
   };
 
-
+  const handlePhotoUrlChange = (event) => {
+    // Handle the change in the photo URL text input
+    setPhotoUrl(event.target.value);
+  };
+  const handleSavePhotoUrl = () => {
+    // Handle saving the photo URL, you can perform additional logic if needed
+    console.log('Saved Photo URL:', photoUrl);
+    // Reset the input after saving
+    setPhotoUrl('');
+  };
   const backgroundImageStyle = {
     backgroundImage: `url('/assets/green.png')`,
     backgroundSize: 'cover', // Adjust as needed
@@ -112,20 +121,20 @@ const Usuario = () => {
     </button>
   </div>
   <div className="mb-4">
-    <label>Subir Foto:</label>
-    <div>
-      <button onClick={handleButtonClick} className="bg-blue-500 text-white py-3 px-8 rounded-md">
-        Abrir Explorador
-      </button>
-      {/* Hidden file input */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-      />
-    </div>
-  </div>
+          <label>Subir Foto:</label>
+          <div>
+            {/* Replace file input with text input for photo URL */}
+            <input
+              type="text"
+              value={photoUrl}
+              onChange={handlePhotoUrlChange}
+              placeholder="Ingrese la URL de la foto"
+              className="block w-full p-2 border rounded-md"/>
+              <button onClick={handleSavePhotoUrl} className="bg-blue-500 text-white py-2 px-4 rounded-md ml-2">
+              Guardar
+            </button>
+          </div>
+        </div>
 </div>;
           
 

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import UserCard from '../components/MerchCard';
+import UserCard from '../components/MerchCardAdmin';
 
 const Admin = () => {
   const [formData, setFormData] = useState({
@@ -94,6 +94,26 @@ const Admin = () => {
     width: 'auto',
     height: 'auto',
   };
+
+  const handleDelete = async (email) => {
+    try {
+      const response = await fetch(`/api/merchant?email=${encodeURIComponent(email)}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        alert('Comerciante eliminado exitosamente');
+        fetchData(); // Refetch data after deletion
+      } else {
+        console.error(`HTTP error! Status: ${response.status}`);
+        alert('Error al eliminar el comerciante');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error al eliminar el comerciante');
+    }
+  };
+  
   return (
     
 
@@ -182,7 +202,8 @@ const Admin = () => {
       <div className="sticky top-0 ml-3 card-list ">
         {filteredData.length > 0 ? (
           filteredData.map((comercio, index) => (
-            <UserCard key={index} merchant={comercio} />
+            <UserCard key={index} merchant={comercio} onDelete={handleDelete} />
+            
           ))
         ) : (
           <div className="bg-gray-200 hidden rounded-md shadow-md">
