@@ -7,7 +7,7 @@ export async function GET(request, {params}) {
     //console.log(serachParams)
     //serachParams.get('nombre')
     //serachParams.get('apellido')
-    const res = await fetch(`http://localhost:3000/user/${params.userId}`)
+    const res = await fetch(`http://localhost:3000/api/merchant/${params.id}`)
     const data = await res.json()
 
     return NextResponse.json({data})

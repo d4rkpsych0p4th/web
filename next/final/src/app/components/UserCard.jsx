@@ -6,6 +6,7 @@ const Card = ({ user }) => (
       <div className="card">
       <strong>{user.nombre}</strong>
         <div className="card-body">
+          <p>id: {user.id}</p>
           <p>Email: {user.email}</p>
           <p>Edad: {user.edad}</p>
           <p>Ciudad: {user.ciudad}</p>

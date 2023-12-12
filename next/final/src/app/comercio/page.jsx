@@ -3,6 +3,7 @@ import React, { useState, useEffect,useRef } from 'react';
 
 const Usuario = () => {
   const [formData, setFormData] = useState({
+    id:'',
     email: '',
     nombre: '',
     password: '',
@@ -32,6 +33,7 @@ const Usuario = () => {
         alert('Datos guardados exitosamente');
         // Optionally, reset the form data after a successful request
         setFormData({
+          id: '',
           email: '',
           nombre: '',
           password: '',

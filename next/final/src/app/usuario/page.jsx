@@ -5,6 +5,7 @@ import UserCard from '../components/MerchCard';
 
 const Usuario = () => {
   const [formData, setFormData] = useState({
+    id:'',
     email: '',
     nombre: '',
     password: '',
@@ -39,7 +40,7 @@ const Usuario = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value, // Manejar el checkbox de manera diferente
+      [name]: type === 'checkbox' ? checked : value, // Manejar el checkbox 
     }));
   };
   const handleSubmit = async () => {
@@ -56,6 +57,7 @@ const Usuario = () => {
         alert('Datos guardados exitosamente');
         // Optionally, reset the form data after a successful request
         setFormData({
+          id:'',
           email: '',
           nombre: '',
           password: '',
@@ -92,17 +94,27 @@ const Usuario = () => {
   
   const backgroundImageStyle = {
     backgroundImage: `url('/assets/santorini.jpg')`,
-    backgroundSize: 'cover', // Adjust as needed
+    backgroundSize: 'conver', // Adjust as needed
     backgroundPosition: 'bottom', // Adjust as needed
     width: 'auto',
     height: 'auto',
   };
   return (
-  
-    <div className="flex items-center justify-begin"  style={backgroundImageStyle}>
 
+    <div className="flex flex-col items-center p-8" style={backgroundImageStyle}>
+    <div className="flex h-screen items-center justify-end">
         <div className=" flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro Usuario</h2>
+          <div className="mb-4">
+            <label>ID USER</label>
+            <input
+              type="text"
+              name="id"
+              value={formData.id}
+              onChange={handleChange}
+              className="block w-full p-2 border rounded-md"
+            />
+          </div>
           <div className="mb-4">
             <label>Email:</label>
             <input
@@ -173,42 +185,7 @@ const Usuario = () => {
             Submit
           </button>
           </div>
-          
-
-
-          <div className="flex h-screen items-center justify-end p-8">
-        <div className="bg-gray-200 p-8 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Busqueda Comerciante</h2>
-          <div className="mt-4">
-          <label>Buscar Comercio:</label>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full p-2 border rounded-md"
-            />
-            <button onClick={handleSearch} className="bg-blue-500 text-white py-2 px-4 rounded-md mt-2">
-              Buscar
-            </button>
           </div>
-        </div>
-      
-     
-      <div>
-      {/* Card list outside the search box container */}
-      <div className="sticky top-0 ml-3 card-list ">
-        {filteredData.length > 0 ? (
-          filteredData.map((comercio, index) => (
-            <UserCard key={index} merchant={comercio} />
-          ))
-        ) : (
-          <div className="bg-gray-200 hidden rounded-md shadow-md">
-            <p>No hay resultados</p>
-          </div>
-        )}
-      </div>
-      </div>
-    </div>
     </div>
   
   );

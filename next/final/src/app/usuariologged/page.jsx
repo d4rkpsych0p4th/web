@@ -1,22 +1,25 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import UserCard from '../components/MerchCardAdmin';
 
-const Admin = () => {
+import React, { useState, useEffect } from 'react';
+import UserCard from '../components/MerchCard';
+
+const Usuario = () => {
   const [formData, setFormData] = useState({
     id:'',
     email: '',
-    nombreComerciante: '',
-    cif: '',
+    nombre: '',
+    password: '',
+    edad: '',
     ciudad: '',
-    telefono: '',
-    puntuacion: 0,
-    comentario: [],
+    intereses: '',
+    permiteofertas: '',
   });
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
+
+
 
   useEffect(() => {
     // Obtener datos almacenados al cargar el componente
@@ -33,18 +36,16 @@ const Admin = () => {
       console.error(error);
     }
   };
-  
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value, // Manejar el checkbox de manera diferente
     }));
   };
-
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/merchant', {  // Assuming your serverless function is in the '/merchant' path
+      const response = await fetch('http://localhost:3000/api/user', {  // Assuming your serverless function is in the '/merchant' path
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,10 +59,12 @@ const Admin = () => {
         setFormData({
           id:'',
           email: '',
-          nombreComerciante: '',
-          cif: '',
+          nombre: '',
+          password: '',
+          edad: '',
           ciudad: '',
-          telefono: '',
+          intereses: '',
+          permiteoferatas: false,
           puntuacion: 0,
           comentario: [],
         });
@@ -74,9 +77,7 @@ const Admin = () => {
       console.error(error);
       alert('Error al guardar los datos');
     }
-  };
-  
-
+  };  
   const handleSearch = () => {
     const filteredResults = storedData.filter(
       (comercio) =>
@@ -89,79 +90,23 @@ const Admin = () => {
 
     setFilteredData(filteredResults);
   };
-
+ 
+  
   const backgroundImageStyle = {
-    backgroundImage: `url('/assets/fondo-admin.jpg')`,
+    backgroundImage: `url('/assets/santorini.jpg')`,
     backgroundSize: 'cover', // Adjust as needed
-    backgroundPosition: 'center', // Adjust as needed
+    backgroundPosition: 'bottom', // Adjust as needed
     width: 'auto',
     height: 'auto',
   };
-
-  // try {
-    //   const response = await fetch(`/api/merchant?email=${encodeURIComponent(email)}`, {
-    //     method: 'DELETE',
-    //   });
-  
-    //   if (response.ok) {
-    //     alert('Comerciante eliminado exitosamente');
-    //     fetchData(); // Refetch data after deletion
-    //   } else {
-    //     console.error(`HTTP error! Status: ${response.status}`);
-    //     alert('Error al eliminar el comerciante');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   alert('Error al eliminar el comerciante');
-    // }
-
-
-  // const handleDelete = async (merchant) => {
-  //   const requestoptions={
-  //   method:"DELETE",
-  //   headers:{"Content-Type":"application/json"},
-  //   body: JSON.stringify(merchant)
-
-  //     }
-  //   fetch("/api/merchant",requestoptions)
-  //   .then((response)=>{
-  //     if(!response.ok) console.log("algo esta mal")
-  //     else
-      
-  //     alert('Comerciante eliminado exitosamente');
-  //   console.log(response)
-
-  //   })
-  // };
-  
-  const handleDelete = async (merchant) => {
-    const requestOptions = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(merchant),
-    };
-  
-    try {
-      const response = await fetch('http://localhost:3000/api/merchant', requestOptions);
-      if (!response.ok) {
-        console.log("Something went wrong");
-      } else {
-        alert('Comerciante eliminado exitosamente');
-        console.log(response);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
-    
-    
-    
-    <div className="flex items-center h-screen justify-begin" style={backgroundImageStyle} >
-        <div className="flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">  
-          <h2 className="text-2xl font-bold mb-4">Registro Comerciante</h2>
+  
+    <div className="flex items-center justify-begin"  style={backgroundImageStyle}>
+
+        <div className=" flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">
+          <h2 className="text-2xl font-bold mb-4">Registro Usuario</h2>
           <div className="mb-4">
-            <label>ID Comerciante</label>
+            <label>ID USER</label>
             <input
               type="text"
               name="id"
@@ -170,7 +115,7 @@ const Admin = () => {
               className="block w-full p-2 border rounded-md"
             />
           </div>
-          <div className="mb-4 ">
+          <div className="mb-4">
             <label>Email:</label>
             <input
               type="email"
@@ -181,26 +126,35 @@ const Admin = () => {
             />
           </div>
           <div className="mb-4">
-            <label>Nombre Comerciante</label>
+            <label>Nombre</label>
             <input
               type="text"
-              name="nombreComerciante"
-              value={formData.nombreComerciante}
+              name="nombre"
+              value={formData.nombre}
               onChange={handleChange}
               className="block w-full p-2 border rounded-md"
             />
           </div>
           <div className="mb-4">
-            <label>CIF</label>
+            <label>password</label>
             <input
-              type="text"
-              name="cif"
-              value={formData.cif}
+              type="password"
+              name="password"
+              value={formData.password}
               onChange={handleChange}
               className="block w-full p-2 border rounded-md"
             />
           </div><div className="mb-4">
-            <label>Ciudad</label>
+            <label>Edad</label>
+            <input
+              type="text"
+              name="edad"
+              value={formData.edad}
+              onChange={handleChange}
+              className="block w-full p-2 border rounded-md"
+            />
+          </div><div className="mb-4">
+            <label>ciudad</label>
             <input
               type="text"
               name="ciudad"
@@ -208,23 +162,30 @@ const Admin = () => {
               onChange={handleChange}
               className="block w-full p-2 border rounded-md"
             />
-          </div><div className="mb-4">
-            <label>telefono</label>
+          </div>
+          <div className="mb-4">
+            <label>Intereses</label>
             <input
-              type="tel"
-              name="telefono"
-              value={formData.telefono}
+              type="text"
+              name="intereses"
+              value={formData.intereses}
               onChange={handleChange}
               className="block w-full p-2 border rounded-md"
             />
-            <div  name="puntuacion"value={formData.puntuacion}></div>
-            <div  name="comentario"value={formData.comentario}></div>
-
           </div>
-          <button onClick={handleSubmit} className="bg-blue-700 text-white py-2 px-4 rounded-md">
+          <div>
+      <label>
+        <input type="checkbox" id="default-checkbox" name="permiteofertas" onChange={handleChange}
+          className="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+        ¿Permitir ofertas?
+      </label>
+    </div>
+    
+          <button onClick={handleSubmit} className="bg-blue-500 text-white py-2 px-4 rounded-md">
             Submit
           </button>
           </div>
+          
 
 
           <div className="flex h-screen items-center justify-end p-8">
@@ -250,8 +211,7 @@ const Admin = () => {
       <div className="sticky top-0 ml-3 card-list ">
         {filteredData.length > 0 ? (
           filteredData.map((comercio, index) => (
-            <UserCard key={index} merchant={comercio} onDelete={handleDelete} />
-            
+            <UserCard key={index} merchant={comercio} />
           ))
         ) : (
           <div className="bg-gray-200 hidden rounded-md shadow-md">
@@ -263,8 +223,7 @@ const Admin = () => {
     </div>
     </div>
   
- 
   );
 };
 
-export default Admin;
+export default Usuario;

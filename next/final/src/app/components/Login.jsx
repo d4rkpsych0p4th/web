@@ -18,7 +18,7 @@ const Login = () => {
   return (
   
 <div className="flex items-center justify-end p-48"  style={backgroundImage}>    
-      <div className="bg-gray-200 opacity-90 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
+      <div className="bg-gray-200 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
         <h2 className="text-2xl font-bold mb-4 opacity-100 ">BIENVENIDO A</h2>
         <h3 className="text-2xl font-bold mb-4 opacity-100">GOURMET EXPLORER</h3>
         <div className="mb-4">
@@ -50,7 +50,10 @@ const Login = () => {
                 <a href="/comercio" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comercio</a>
               </li>
               <li>
-                <a href="/usuario" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Usuario</a>
+                <a href="/usuariologged" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Usuario</a>
+              </li>
+              <li>
+                <a href="/usuario" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Registro</a>
               </li>
               <li>
                 <a href="/anon" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Anon</a>
