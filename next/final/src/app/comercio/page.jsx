@@ -1,39 +1,68 @@
 "use client"
-import Image from 'next/image';
 import React, { useState, useEffect,useRef } from 'react';
-import UserCard from '../components/UserCard';
 
 const Usuario = () => {
-  
+  const [formData, setFormData] = useState({
+    email: '',
+    nombre: '',
+    password: '',
+    edad: '',
+    ciudad: '',
+    intereses: '',
+    permiteoferatas: false,
+    puntuacion: 0,
+    comentario: [],
+  });
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
-  const [photoUrl, setPhotoUrl] = useState('');
-  useEffect(() => {
-    // Obtener datos almacenados al cargar el componente
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  
+  const handleSubmit = async () => {
     try {
-      const response = await fetch('/api/user');
-      const data = await response.json();
-      //console.log(data.users); // Adjust the property based on your actual response structure
-      setStoredData(data.users);
+      const response = await fetch('/merchant', {  // Assuming your serverless function is in the '/merchant' path
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert('Datos guardados exitosamente');
+        // Optionally, reset the form data after a successful request
+        setFormData({
+          email: '',
+          nombre: '',
+          password: '',
+          edad: '',
+          ciudad: '',
+          intereses: '',
+          permiteoferatas: false,
+          puntuacion: 0,
+          comentario: [],
+     
+        });
+      } else {
+        console.error(`HTTP error! Status: ${response.status}`);
+        alert('Error al guardar los datos');
+      }
     } catch (error) {
       console.error(error);
+      alert('Error al guardar los datos');
     }
-  };
+  }; 
   
   const handleSearch = () => {
-    // Filtrar los usuarios basados en el término de búsqueda
-    const filteredResults = storedData.filter((usuario) =>
-      Object.values(usuario).some(
-        (value) =>
-          typeof value === "string" && value.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    // Filtrar los comercios basados en el término de búsqueda
+    
+    const filteredResults = storedData.filter(
+      (Usuario) =>
+        Usuario.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        Usuario.intereses.toLowerCase().includes(searchTerm.toLowerCase()) 
+        
     );
-  
+
     setFilteredData(filteredResults);
   };
 
@@ -50,30 +79,18 @@ const Usuario = () => {
     console.log('Selected File:', selectedFile);
   };
 
-  const handlePhotoUrlChange = (event) => {
-    // Handle the change in the photo URL text input
-    setPhotoUrl(event.target.value);
-  };
-  const handleSavePhotoUrl = () => {
-    // Handle saving the photo URL, you can perform additional logic if needed
-    console.log('Saved Photo URL:', photoUrl);
-    // Reset the input after saving
-    setPhotoUrl('');
-  };
-  const backgroundImageStyle = {
-    backgroundImage: `url('/assets/green.png')`,
-    backgroundSize: 'cover', // Adjust as needed
-    backgroundPosition: 'bottom', // Adjust as needed
-    width: 'auto',
-    height: 'auto',
-  };
+
+  
+
+  
+  
 
   return (
     
-    
-    <div className="flex items-center justify-begin" style={backgroundImageStyle} >
-          
-    <div className="flex flex-col bg-gray-300 p-8 ml-20 rounded-md shadow-md">
+    <div>
+    <div className="flex items-center justify-begin p-48"  style={{ backgroundImage: `url('/assets/green.png')`, backgroundSize: 'cover', backgroundPosition: 'bottom', width: '100vw', height: '100vh' }}>
+    <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
+    <div className="bg-gray-300 p-8 rounded-md shadow-md md:w-96">
   <h2 className="text-2xl font-bold mb-4">Editar Comercio</h2>
   <div className="mb-4">
     <label>Ciudad:</label>
@@ -121,24 +138,26 @@ const Usuario = () => {
     </button>
   </div>
   <div className="mb-4">
-          <label>Subir Foto:</label>
-          <div>
-            {/* Replace file input with text input for photo URL */}
-            <input
-              type="text"
-              value={photoUrl}
-              onChange={handlePhotoUrlChange}
-              placeholder="Ingrese la URL de la foto"
-              className="block w-full p-2 border rounded-md"/>
-              <button onClick={handleSavePhotoUrl} className="bg-blue-500 text-white py-2 px-4 rounded-md ml-2">
-              Guardar
-            </button>
-          </div>
-        </div>
+    <label>Subir Foto:</label>
+    <div>
+      <button onClick={handleButtonClick} className="bg-blue-500 text-white py-3 px-8 rounded-md">
+        Abrir Explorador
+      </button>
+      {/* Hidden file input */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
+    </div>
+  </div>
 </div>;
           
 
-<div className="flex h-screen items-center justify-end p-8 ">
+
+
+          <div className="flex h-screen items-center justify-end p-8 ">
         <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
           <h2 className="text-2xl font-bold mb-4">Busqueda de Usuario</h2>
           <div className="mt-4">
@@ -153,24 +172,31 @@ const Usuario = () => {
               Buscar
             </button>
           </div>
-        </div>
-      </div>
-
-      {/* Card list outside the search box container */}
-      <div className="flex flex-col flex-fil card-list">
-        {filteredData.length > 0 ? (
-          filteredData.map((usuario, index) => (
-            <UserCard key={index} user={usuario} />
-          ))
-        ) : (
-          <div className="bg-gray-200 p-8 hidden rounded-md shadow-md md:w-96">
-          <p>No hay resultados</p>
+          <div className="mt-4">
+            <h3>Usuarios Guardados:</h3>
+            <ul>
+            {filteredData.length > 0 ? (
+            filteredData.map((comercio, index) => (
+              <li key={index}>
+                <strong>{Usuario.nombre}</strong>
+                <p>Email: {Usuario.email }</p>
+                <p>Edad: {Usuario.edad}</p>
+                <p>Ciudad: {Usuario.Ciudad }</p>
+                <p>Recibir Ofertas: {Usuario.permiteOfertas ? 'Quiere Recibir Ofertas' : 'No Quiere Recibir Ofertas'}</p>
+                <p>Intereses: {Usuario.intereses}</p>
+              </li>
+                  ))
+                ) : (
+                  <p>No hay resultados</p>
+                )}
+                </ul>
+            </div>
           </div>
-        )}
+        </div>
+      </div>  
       </div>
-    </div>
+      
   );
 };
-
 
 export default Usuario;

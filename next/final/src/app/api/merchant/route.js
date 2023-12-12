@@ -23,22 +23,35 @@ export async function GET() {
     }
 }
 
+// export async function DELETE(request) {
+//     const { email } = request.query || {};
+  
+//     if (!email) {
+//       return NextResponse.json({
+//         message: 'Invalid request. Email parameter is missing.',
+//         status: 400,
+//       });
+//     }
+  
+//     try {
+//       let users = JSON.parse(readFileSync('data/merchant.txt'));
+//       users = users.filter((user) => user.email !== email);
+//       writeFileSync('data/merchant.txt', JSON.stringify(users));
+//       return NextResponse.json({ message: 'Comerciante eliminado correctamente.' });
+//     } catch (e) {
+//       return NextResponse.json({ message: 'Error al eliminar el comerciante.', status: 500 });
+//     }
+//   }
 export async function DELETE(request) {
-    const { email } = request.query || {};
-  
-    if (!email) {
-      return NextResponse.json({
-        message: 'Invalid request. Email parameter is missing.',
-        status: 400,
-      });
-    }
-  
-    try {
-      let users = JSON.parse(readFileSync('data/merchant.txt'));
-      users = users.filter((user) => user.email !== email);
-      writeFileSync('data/merchant.txt', JSON.stringify(users));
-      return NextResponse.json({ message: 'Comerciante eliminado correctamente.' });
-    } catch (e) {
-      return NextResponse.json({ message: 'Error al eliminar el comerciante.', status: 500 });
-    }
-  }
+  const data = await request.json()
+  try {
+       const users = JSON.parse(readFileSync("data/merchant.txt"))
+       console.log("usuarioassANTESfilter",users)
+       const usersFIlter = users.filter(merchant => merchant.email != data.email) 
+       console.log("Usurios Filtrados:",usersFIlter)
+       writeFileSync("data/merchant.txt", JSON.stringify(usersFIlter))
+       return NextResponse.json({message: "MERCHANT eliminado...", status: 200})
+   } catch(e){
+       console.log(e)
+   }
+}

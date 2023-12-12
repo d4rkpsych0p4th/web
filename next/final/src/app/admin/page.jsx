@@ -87,6 +87,7 @@ const Admin = () => {
 
     setFilteredData(filteredResults);
   };
+
   const backgroundImageStyle = {
     backgroundImage: `url('/assets/fondo-admin.jpg')`,
     backgroundSize: 'cover', // Adjust as needed
@@ -95,30 +96,46 @@ const Admin = () => {
     height: 'auto',
   };
 
-  const handleDelete = async (email) => {
-    try {
-      const response = await fetch(`/api/merchant?email=${encodeURIComponent(email)}`, {
-        method: 'DELETE',
-      });
   
-      if (response.ok) {
-        alert('Comerciante eliminado exitosamente');
-        fetchData(); // Refetch data after deletion
-      } else {
-        console.error(`HTTP error! Status: ${response.status}`);
-        alert('Error al eliminar el comerciante');
+
+  const handleDelete = async (merchant) => {
+    const requestoptions={
+    method:"DELETE",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(merchant)
+
       }
-    } catch (error) {
-      console.error(error);
-      alert('Error al eliminar el comerciante');
-    }
+    fetch("/api/merchant",requestoptions)
+    .then((response)=>{
+      if(!response.ok) console.log("algo esta mal")
+      else
+      
+      alert('Comerciante eliminado exitosamente');
+    console.log(response)
+
+    })
+    // try {
+    //   const response = await fetch(`/api/merchant?email=${encodeURIComponent(email)}`, {
+    //     method: 'DELETE',
+    //   });
+  
+    //   if (response.ok) {
+    //     alert('Comerciante eliminado exitosamente');
+    //     fetchData(); // Refetch data after deletion
+    //   } else {
+    //     console.error(`HTTP error! Status: ${response.status}`);
+    //     alert('Error al eliminar el comerciante');
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    //   alert('Error al eliminar el comerciante');
+    // }
   };
   
   return (
     
 
-    <div className="flex items-center h-screen justify-begin h-screen" style={backgroundImageStyle} >
-     
+    <div className="flex items-center h-screen justify-begin" style={backgroundImageStyle} >
 
         <div className="flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">  
           <h2 className="text-2xl font-bold mb-4">Registro Comerciante</h2>

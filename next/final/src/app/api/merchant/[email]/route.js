@@ -1,22 +1,14 @@
-import { NextResponse } from 'next/server';
-import { readFileSync, writeFileSync } from 'fs';
+import { NextResponse } from "next/server";
 
-export async function DELETE(request) {
-  const { email } = request.query || {};
+export async function GET(request, {params}) {
+    //console.log(params)
+    const {serachParams} = new URL(request.url)
+    //Extraer queries después del ?
+    //console.log(serachParams)
+    //serachParams.get('nombre')
+    //serachParams.get('apellido')
+    const res = await fetch(`http://localhost:3000/api/merchant/${params.nombre}`)
+    const data = await res.json()
 
-  if (!email) {
-    return NextResponse.json({
-      message: 'Invalid request. Email parameter is missing.',
-      status: 400,
-    });
-  }
-
-  try {
-    let users = JSON.parse(readFileSync('data/merchant.txt'));
-    users = users.filter((user) => user.email !== email);
-    writeFileSync('data/merchant.txt', JSON.stringify(users));
-    return NextResponse.json({ message: 'Comerciante eliminado correctamente.' });
-  } catch (e) {
-    return NextResponse.json({ message: 'Error al eliminar el comerciante.', status: 500 });
-  }
+    return NextResponse.json({data})
 }

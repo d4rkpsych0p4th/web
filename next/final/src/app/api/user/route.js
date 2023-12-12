@@ -20,6 +20,6 @@ export async function GET() {
       return NextResponse.json({ users });
     } catch (e) {
       // Return an empty array when the file doesn't exist
-      return NextResponse.json({ users: [], message: "USUARIOS no existen...", status: 400 });
+      return NextResponse.json({ user: [], message: "USUARIOS no existen...", status: 400 });
     }
   }

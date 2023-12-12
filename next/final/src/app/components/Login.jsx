@@ -1,24 +1,28 @@
 "use client"
-import Image from 'next/image';
-import Link from 'next/link';
 // src/components/Login.js
+import React, { useEffect, useState } from 'react';
 import styles from './styles.css';
+
+
 const Login = () => {
  
+
+
   const backgroundImageStyle = {
-    backgroundImage: `url('/assets/hamburguer2.jpg')`,
-    backgroundSize: 'contain', // Adjust as needed
-    backgroundPosition: 'bottom', // Adjust as needed
+    backgroundImage: `url('/assets/hamburguer.jpg')`,
+    backgroundSize: 'cover', // Adjust as needed
+    backgroundPosition: 'center', // Adjust as needed
     width: '100vw',
     height: '100vh',
   };
   return (
   
-    <div className="flex items-center justify-end" style={backgroundImageStyle}>
-        
-      <div className="bg-gray-200 p-8 rounded-md mr-20 shadow-md items-center w-96 h-200">
-        <h2 className="text-2xl font-bold mb-4 ">BIENVENIDO A</h2>
-        <h3 className="text-2xl font-bold mb-4">GOURMET EXPLORER</h3>
+    <div className={`flex h-screen items-center justify-end p-4 ${styles.loginContainer}`}>
+      <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
+  
+      <div className="bg-gray-200 opacity-90 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
+        <h2 className="text-2xl font-bold mb-4 opacity-100 ">BIENVENIDO A</h2>
+        <h3 className="text-2xl font-bold mb-4 opacity-100">GOURMET EXPLORER</h3>
         <div className="mb-4">
           <label>Email:</label>
           <input type="email" className="block w-full p-2 border rounded-md" />
@@ -27,7 +31,7 @@ const Login = () => {
           <label>Password:</label>
           <input type="password" className="block w-full p-2 border rounded-md" />
         </div>
-         <button   className="bg-blue-500 text-white py-2 px-4 rounded-md font-bold">Login</button>
+         <button className="bg-blue-500 text-white py-2 px-4 rounded-md font-bold">Login</button>
 
 
 
@@ -42,24 +46,24 @@ const Login = () => {
               <div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
               <li>
-              <Link href="/admin" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin</Link>
-                </li>
-              <li>
-              <Link href="/comercio" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comercio</Link>              
-                </li>
-              <li>
-              <Link href="/usuario" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Usuario</Link>              
+                <a href="/admin" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin</a>
               </li>
               <li>
-              <Link href="/anon" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Anon</Link>              
+                <a href="/comercio" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comercio</a>
+              </li>
+              <li>
+                <a href="/usuario" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Usuario</a>
+              </li>
+              <li>
+                <a href="/anon" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Anon</a>
               </li>
             </ul>
         </div>
         </div>
-      
-      </div>
-    
+       
 
+        
+      </div>
     </div>
   );
 };
