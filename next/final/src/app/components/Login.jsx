@@ -8,18 +8,16 @@ const Login = () => {
  
 
 
-  const backgroundImageStyle = {
-    backgroundImage: `url('/assets/hamburguer.jpg')`,
-    backgroundSize: 'cover', // Adjust as needed
+  const backgroundImage = {
+    backgroundImage: `url('/assets/hamburguer2.jpg')`,
+    backgroundSize: 'contain', // Adjust as needed
     backgroundPosition: 'center', // Adjust as needed
     width: '100vw',
     height: '100vh',
   };
   return (
   
-    <div className={`flex h-screen items-center justify-end p-4 ${styles.loginContainer}`}>
-      <img src="/assets/logo.png" alt="Logo" style={{ position: 'absolute',top: '10px', left: '10px', width: '500px', height: 'auto',}}/>
-  
+<div className="flex items-center justify-end p-48"  style={backgroundImage}>    
       <div className="bg-gray-200 opacity-90 p-8 rounded-md shadow-md items-center"style={{ width: '500px', height: '420px' }}>
         <h2 className="text-2xl font-bold mb-4 opacity-100 ">BIENVENIDO A</h2>
         <h3 className="text-2xl font-bold mb-4 opacity-100">GOURMET EXPLORER</h3>
