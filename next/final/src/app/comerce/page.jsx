@@ -2,15 +2,46 @@
 
 import React, { useState, useEffect } from 'react';
 import UserCard from '../components/UserCard';
+import Link from 'next/link';
 
 const Usuario = () => {
-  
+  const [id, setId] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
   const [photoUrl, setPhotoUrl] = useState('');
   
-  
+  async function loadUser(id) {
+    const res = await fetch(`http://localhost:3000/api/merchant/${id}`);
+    const data = await res.json();
+    return data.user;
+  }
+
+  const handleUpdateMerchant = async () => {
+    // Obtén los datos actuales del comercio
+    const currentMerchant = await loadUser(params.id);
+
+    // Combina los datos actuales con los nuevos datos introducidos por el usuario
+    const updatedData = {
+      ...currentMerchant,
+      ...newData,
+    };
+
+    // Filtra los campos que no se han proporcionado (es decir, aquellos que están vacíos)
+    const filteredData = Object.keys(updatedData).reduce((acc, key) => {
+      if (newData[key] !== '') {
+        acc[key] = updatedData[key];
+      }
+      return acc;
+    }, {});
+
+    // Actualiza el comercio
+    await updateMerchant(params.id, filteredData);
+
+    // Recarga los datos después de la actualización
+    const updatedUser = await loadUser(params.id);
+    setMerchant(updatedUser);
+  };
 
   const fetchData = async () => {
     try {
@@ -46,6 +77,7 @@ const Usuario = () => {
   
       setFilteredData(filteredResults);
     };
+    
  
   const handlePhotoUrlChange = (event) => {
     // Handle the change in the photo URL text input
@@ -65,6 +97,11 @@ const Usuario = () => {
     height: 'auto',
   };
 
+  const handleUserIdChange = (e) => {
+    setId(e.target.value);
+  };
+  
+
   return (
     
     
@@ -72,65 +109,23 @@ const Usuario = () => {
           
     <div className="flex flex-col bg-gray-300 p-8 ml-20 rounded-md shadow-md">
   <h2 className="text-2xl font-bold mb-4">Editar Comercio</h2>
-  <div className="mb-4">
-    <label>Ciudad:</label>
-    <button
-      onClick={() => console.log("Botón de Ciudad")}
-      className="block w-full p-2 border rounded-md bg-blue-500 text-white"
-    >
-      Editar Ciudad
-    </button>
-  </div>
-  <div className="mb-4">
-    <label>Actividad</label>
-    <button
-      onClick={() => console.log("Botón de Actividad")}
-      className="block w-full p-2 border rounded-md bg-blue-500 text-white"
-    >
-      Editar Actividad
-    </button>
-  </div>
-  <div className="mb-4">
-    <label>Titulo</label>
-    <button
-      onClick={() => console.log("Botón de Titulo")}
-      className="block w-full p-2 border rounded-md bg-blue-500 text-white"
-    >
-      Editar Titulo
-    </button>
-  </div>
-  <div className="mb-4">
-    <label>Resumen</label>
-    <button
-      onClick={() => console.log("Botón de Resumen")}
-      className="block w-full p-2 border rounded-md bg-blue-500 text-white"
-    >
-      Editar Resumen
-    </button>
-  </div>
-  <div className="mb-4">
-    <label>Texto</label>
-    <button
-      onClick={() => console.log("Botón de Texto")}
-      className="block w-full p-2 border rounded-md bg-blue-500 text-white"
-    >
-      Editar Texto
-    </button>
-  </div>
-  <div className="mb-4">
-          <label>Subir Foto:</label>
-          <div>
-            {/* Replace file input with text input for photo URL */}
+  <div>
+          {/* ... código restante del componente */}
+          <form>
+            {/* Otros campos del formulario */}
+            <label>ID del comercio:</label>
             <input
               type="text"
-              value={photoUrl}
-              onChange={handlePhotoUrlChange}
-              placeholder="Ingrese la URL de la foto"
-              className="block w-full p-2 border rounded-md"/>
-              <button onClick={handleSavePhotoUrl} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md ml-2">
-              Guardar
+              value={id}
+              onChange={handleUserIdChange}
+            />
+          </form>
+
+          <Link href={`/comerce/${id}`} key={id}>
+            <button onClick={handleUpdateMerchant} className="mt-4 bg-blue-700 text-white py-2 px-4 rounded-md">
+              EDITAR CUENTA
             </button>
-          </div>
+          </Link>
         </div>
 </div>;
           

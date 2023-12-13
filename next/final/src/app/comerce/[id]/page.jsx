@@ -45,6 +45,7 @@ function Page({ params }) {
           telefono: '',
           puntuacion: 0,
           comentario: [],
+          photoUrl: '',
   });
 
   useEffect(() => {
@@ -90,6 +91,13 @@ function Page({ params }) {
     });
   };
 
+  const handlePhotoUrlChange = (e) => {
+    // Actualiza el estado con la nueva URL de la foto
+    setNewData({
+      ...newData,
+      photoUrl: e.target.value,
+    });
+  };
   return (
     <div className="min-h-screen flex items-center justify-center" style={backgroundImage}>
       {merchant && (
@@ -99,10 +107,10 @@ function Page({ params }) {
           <UserCard key={params.id} merchant={merchant} />
           
           {/* Formulario para introducir nuevos datos */}
-          <form>
+          <form >
             <label>Email:</label>
             <input
-              type="text"
+              type="text"  className="mb-4 border rounded-md"
               name="email"
               value={newData.email}
               onChange={handleInputChange}
@@ -110,7 +118,7 @@ function Page({ params }) {
 
             <label>CIF:</label>
             <input
-              type="text"
+              type="text"  className="mb-4 border rounded-md"
               name="cif"
               value={newData.cif}
               onChange={handleInputChange}
@@ -118,7 +126,7 @@ function Page({ params }) {
 
             <label>Ciudad:</label>
             <input
-              type="text"
+              type="text"  className="mb-4 border rounded-md"
               name="ciudad"
               value={newData.ciudad}
               onChange={handleInputChange}
@@ -126,20 +134,32 @@ function Page({ params }) {
 
             <label>Teléfono:</label>
             <input
-              type="text"
+              type="text"  className="mb-4 border rounded-md"
               name="telefono"
               value={newData.telefono}
               onChange={handleInputChange}
             />
-          </form>
-          
-          <button onClick={handleUpdateMerchant} className="bg-blue-700 mt-4 text-white py-2 px-4 rounded-md">Guardar Cambios</button>
-          
-        </div>
+         <div className="mb-4 px-4 py-4">
+                <label>Subir Foto:</label>
+                <div>
+                  <input
+                    type="text"
+                    value={newData.photoUrl}
+                    onChange={handlePhotoUrlChange}
+                    placeholder="Ingrese la URL de la foto"
+                    className="block w-full p-2 border rounded-md"
+                  />
+                  <button onClick={handleUpdateMerchant} className="mt-4 bg-blue-700 text-white py-2 px-4 rounded-md">
+                    Guardar Cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default Page;
