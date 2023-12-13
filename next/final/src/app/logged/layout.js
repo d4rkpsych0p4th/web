@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 export const metadata = {
-    title: "comerciante",
+    title: "logged",
   }
 
-export default function comercianteLayout({ children }) {
+export default function loggedLayout({ children }) {
     return (
       
         <div>

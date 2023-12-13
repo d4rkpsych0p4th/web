@@ -65,8 +65,6 @@ const Usuario = () => {
           ciudad: '',
           intereses: '',
           permiteoferatas: false,
-          puntuacion: 0,
-          comentario: [],
         });
         fetchData(); // Refetch data after submission
       } else {

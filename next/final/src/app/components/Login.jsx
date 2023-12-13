@@ -1,8 +1,6 @@
 "use client"
-import Image from 'next/image';
 import Link from 'next/link';
-// src/components/Login.js
-import styles from './styles.css';
+
 const Login = () => {
  
   const backgroundImageStyle = {

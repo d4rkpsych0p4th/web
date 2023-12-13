@@ -1,9 +1,9 @@
 
 export const metadata = {
-    title: "usuario",
+    title: "comercio",
   }
 
-export default function usuarioLayout({ children }) {
+export default function comercioLayout({ children }) {
     return (
         
         <div>
