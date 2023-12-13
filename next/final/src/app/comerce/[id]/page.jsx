@@ -37,11 +37,14 @@ const backgroundImage = {
 function Page({ params }) {
   const [merchant, setMerchant] = useState(null);
   const [newData, setNewData] = useState({
-    email: '',
-    cif: '',
-    ciudad: '',
-    telefono: '',
-    // Agrega más propiedades si es necesario
+          id:'',
+          email: '',
+          nombreComerciante: '',
+          cif: '',
+          ciudad: '',
+          telefono: '',
+          puntuacion: 0,
+          comentario: [],
   });
 
   useEffect(() => {

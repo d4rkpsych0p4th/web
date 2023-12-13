@@ -38,14 +38,14 @@ const Usuario = () => {
       const filteredResults = Array.isArray(storedData.user)
         ? storedData.user.filter(
             (user) =>
-            user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            user.ciudad.toLowerCase().includes(searchTerm.toLowerCase())
+              (user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              user.ciudad.toLowerCase().includes(searchTerm.toLowerCase())) &&
+              (user.permiteofertas ? true : false)
           )
         : [];
   
       setFilteredData(filteredResults);
     };
-  
  
   const handlePhotoUrlChange = (event) => {
     // Handle the change in the photo URL text input
