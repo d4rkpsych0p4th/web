@@ -36,3 +36,20 @@ export async function DELETE(request) {
     return NextResponse.json({ message: "Error al eliminar el MERCHANT.", status: 500 });
   }
 }
+
+
+// export async function PUT(request) {
+//   const data = await request.json();
+//   try {
+//     const merchants = JSON.parse(readFileSync("data/merchant.txt"));
+//     // Encuentra y actualiza el comercio con el ID correspondiente
+//     const updatedMerchants = merchants.map((merchant) =>
+//       merchant.id === data.id ? { ...merchant, ...data } : merchant
+//     );
+//     writeFileSync("data/merchant.txt", JSON.stringify(updatedMerchants));
+//     return NextResponse.json({ message: "Actualización exitosa", status: 200 });
+//   } catch (e) {
+//     console.error("Error updating merchant:", e);
+//     return NextResponse.json({ message: "Error al actualizar el comercio.", status: 500 });
+//   }
+// }

@@ -73,21 +73,22 @@ const Anon = () => {
 
     {/* Card list outside the search box container */}
     <div className="flex flex-col flex-fil card-list mt-4">
-      {filteredData.length > 0 ? (
-        filteredData.map((comercio, index) => (
-          <UserCard key={index} merchant={comercio} />
-        ))
-      ) : (
-        <div className="bg-gray-200 hidden rounded-md shadow-md">
-          <p>No hay resultados</p>
-        </div>
-      )}
+        {filteredData.length > 0 ? (
+          filteredData.map((comercio) => (
+            <Link href={`/comercio/${comercio.id}`} key={comercio.id}>
+              
+                <UserCard merchant={comercio} />
+              
+            </Link>
+          ))
+        ) : (
+          <div className="bg-gray-200 hidden rounded-md shadow-md">
+            <p>No hay resultados</p>
+          </div>
+        )}
+      </div>
     </div>
-   
-  </div>
- 
-);
+  );
 };
-
 
 export default Anon;

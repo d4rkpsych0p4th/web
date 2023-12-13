@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserCard from '../components/UserCard';
 
 const Usuario = () => {
@@ -10,41 +10,41 @@ const Usuario = () => {
   const [storedData, setStoredData] = useState([]);
   const [photoUrl, setPhotoUrl] = useState('');
   
+  
+
+  const fetchData = async () => {
+    try {
+      //const response = JSON.parse(readFileSync("data/user.txt"))
+      const response = await fetch('http://localhost:3000/api/user');
+      const data = await response.json();
+      console.log("fetchdatea:",data)
+      setStoredData(data);
+      console.log("fetchdatea2:",setStoredData)
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     // Obtener datos almacenados al cargar el componente
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('/api/user');
-      const data = await response.json();
-      //console.log("fetchdatea:",data)
-      setStoredData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const handleSearch = () => {
     //console.log('Stored Data:', storedData);
     //console.log('Search Term:', searchTerm);
   
     // Check if storedData is an array before applying filter
-    const filteredResults = Array.isArray(storedData.user)
-      ? storedData.user.filter(
-          (comercio) =>
-            comercio.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            comercio.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            comercio.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            comercio.telefono.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      : [];
+    const handleSearch = () => {
+      const filteredResults = Array.isArray(storedData.user)
+        ? storedData.user.filter(
+            (user) =>
+            user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.ciudad.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : [];
   
-    console.log('Filtered Results:', filteredResults);
-  
-    setFilteredData(filteredResults);
-  };
+      setFilteredData(filteredResults);
+    };
   
  
   const handlePhotoUrlChange = (event) => {
@@ -156,8 +156,8 @@ const Usuario = () => {
       {/* Card list outside the search box container */}
       <div className="flex flex-col flex-fil card-list">
         {filteredData.length > 0 ? (
-          filteredData.map((usuario, index) => (
-            <UserCard key={index} user={usuario} />
+          filteredData.map((user, index) => (
+            <UserCard key={index} user={user} />
           ))
         ) : (
           <div className="bg-gray-200 p-8 hidden rounded-md shadow-md md:w-96">
