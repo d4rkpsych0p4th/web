@@ -19,8 +19,7 @@ const backgroundImage = {
 async function Page({ params }) {
   const user = await loadUser(params.id);
   return (
-    <div
-    className="min-h-screen flex items-center justify-center" style={backgroundImage}>
+    <div className="min-h-screen flex items-center justify-center" style={backgroundImage}>
         
       <UserCard key={params.id} merchant={user} />
    

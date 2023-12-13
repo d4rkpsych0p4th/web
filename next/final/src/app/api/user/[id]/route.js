@@ -5,7 +5,7 @@ import { readFileSync } from 'fs';
 export async function GET(request, { params }) {
   try {
     const users = JSON.parse(readFileSync("data/user.txt"));
-    const user = users.find((user) => user.id === params.id);
+    const user = users.find((user) => user.email === params.email);
 
     if (!user) {
       return NextResponse.json({ message: "user not found", status: 404 });
