@@ -90,10 +90,49 @@ function Page({ params }) {
   return (
     <div className="min-h-screen flex items-center justify-center" style={backgroundImage}>
       {merchant && (
+         <div className="flex flex-col bg-gray-200 bg-opacity-50 p-8 ml-20 rounded-md shadow-md">
+         <h2 className="text-2xl font-bold mb-4">Editar Datos</h2>
         <div>
           <UserCard key={params.id} merchant={merchant} />
-         
-       
+          
+          {/* Formulario para introducir nuevos datos */}
+          <form>
+            <label>Email:</label>
+            <input
+              type="text"
+              name="email"
+              value={newData.email}
+              onChange={handleInputChange}
+            />
+
+            <label>CIF:</label>
+            <input
+              type="text"
+              name="cif"
+              value={newData.cif}
+              onChange={handleInputChange}
+            />
+
+            <label>Ciudad:</label>
+            <input
+              type="text"
+              name="ciudad"
+              value={newData.ciudad}
+              onChange={handleInputChange}
+            />
+
+            <label>Teléfono:</label>
+            <input
+              type="text"
+              name="telefono"
+              value={newData.telefono}
+              onChange={handleInputChange}
+            />
+          </form>
+          
+          <button onClick={handleUpdateMerchant} className="bg-blue-700 mt-4 text-white py-2 px-4 rounded-md">Guardar Cambios</button>
+          
+        </div>
         </div>
       )}
     </div>

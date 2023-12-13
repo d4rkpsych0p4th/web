@@ -43,7 +43,7 @@ const Login = () => {
               <Link href="/admin" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin</Link>
                 </li>
               <li>
-              <Link href="/comercio" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comercio</Link>              
+              <Link href="/comerce" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comercio</Link>              
                 </li>
                 <li>
               <Link href="/logged" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Usuario</Link>              
