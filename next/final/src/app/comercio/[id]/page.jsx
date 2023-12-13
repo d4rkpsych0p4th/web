@@ -41,6 +41,7 @@ function Page({ params }) {
     cif: '',
     ciudad: '',
     telefono: '',
+    photoUrl: '',
     // Agrega más propiedades si es necesario
   });
 

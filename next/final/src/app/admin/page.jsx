@@ -64,6 +64,7 @@ const Admin = () => {
           telefono: '',
           puntuacion: 0,
           comentario: [],
+          photoUrl: '',
         });
         fetchData(); // Refetch data after submission
       } else {
