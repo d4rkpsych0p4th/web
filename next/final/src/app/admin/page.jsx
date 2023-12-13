@@ -89,7 +89,6 @@ const Admin = () => {
 
     setFilteredData(filteredResults);
   };
-
   const backgroundImageStyle = {
     backgroundImage: `url('/assets/fondo-admin.jpg')`,
     backgroundSize: 'cover', // Adjust as needed
@@ -98,70 +97,38 @@ const Admin = () => {
     height: 'auto',
   };
 
-  // try {
-    //   const response = await fetch(`/api/merchant?email=${encodeURIComponent(email)}`, {
-    //     method: 'DELETE',
-    //   });
-  
-    //   if (response.ok) {
-    //     alert('Comerciante eliminado exitosamente');
-    //     fetchData(); // Refetch data after deletion
-    //   } else {
-    //     console.error(`HTTP error! Status: ${response.status}`);
-    //     alert('Error al eliminar el comerciante');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   alert('Error al eliminar el comerciante');
-    // }
-
-
-  // const handleDelete = async (merchant) => {
-  //   const requestoptions={
-  //   method:"DELETE",
-  //   headers:{"Content-Type":"application/json"},
-  //   body: JSON.stringify(merchant)
-
-  //     }
-  //   fetch("/api/merchant",requestoptions)
-  //   .then((response)=>{
-  //     if(!response.ok) console.log("algo esta mal")
-  //     else
-      
-  //     alert('Comerciante eliminado exitosamente');
-  //   console.log(response)
-
-  //   })
-  // };
-  
-  const handleDelete = async (merchant) => {
+  const handleDelete = async (email) => {
     const requestOptions = {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(merchant),
+      body: JSON.stringify({ email }),
     };
   
     try {
-      const response = await fetch('http://localhost:3000/api/merchant', requestOptions);
+      const response = await fetch(`http://localhost:3000/api/merchant`, requestOptions);
       if (!response.ok) {
         console.log("Something went wrong");
       } else {
-        alert('Comerciante eliminado exitosamente');
-        console.log(response);
+        const result = await response.json();
+       // alert(result.message);
+        console.log(result);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error:", error);
     }
   };
+  
+  
   return (
     
-    
-    
+
     <div className="flex items-center h-screen justify-begin" style={backgroundImageStyle} >
+     
+
         <div className="flex flex-col bg-gray-200 ml-20 p-8 rounded-md shadow-md">  
           <h2 className="text-2xl font-bold mb-4">Registro Comerciante</h2>
-          <div className="mb-4">
-            <label>ID Comerciante</label>
+          <div className="mb-4 ">
+            <label>ID:</label>
             <input
               type="text"
               name="id"
@@ -177,8 +144,7 @@ const Admin = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="block w-full p-2 border rounded-md"
-            />
+              className="block w-full p-2 border rounded-md"/>
           </div>
           <div className="mb-4">
             <label>Nombre Comerciante</label>
@@ -227,7 +193,7 @@ const Admin = () => {
           </div>
 
 
-          <div className="flex h-screen items-center justify-end p-8">
+          <div className="flex items-center justify-end p-8">
         <div className="bg-gray-200 p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Busqueda Comerciante</h2>
           <div className="mt-4">
@@ -247,6 +213,7 @@ const Admin = () => {
      
       <div>
       {/* Card list outside the search box container */}
+      <div className="flex flex-grow items-center h-screen justify-begin">
       <div className="sticky top-0 ml-3 card-list ">
         {filteredData.length > 0 ? (
           filteredData.map((comercio, index) => (
@@ -260,6 +227,7 @@ const Admin = () => {
         )}
       </div>
       </div>
+    </div>
     </div>
     </div>
   

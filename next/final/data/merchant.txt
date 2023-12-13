@@ -1,1 +1,1 @@
-[[]]
+[{"id":"1","email":"telepi@gmail.com","nombreComerciante":"telepizza","cif":"e123123","ciudad":"madrid","telefono":"61616161","puntuacion":5,"comentario":[]},{"id":"2","email":"pasta@gmail.com","nombreComerciante":"pasta","cif":"e123123","ciudad":"barcelona","telefono":"63333333","puntuacion":6,"comentario":[]},{"id":"3","email":"italiano@gmail.com","nombreComerciante":"rigatoni","cif":"e333333","ciudad":"madrid","telefono":"612222221","puntuacion":8,"comentario":[]}]

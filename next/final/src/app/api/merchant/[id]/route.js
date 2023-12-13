@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
+import { readFileSync } from 'fs';
 
-export async function GET(request, {params}) {
-    //console.log(params)
-    const {serachParams} = new URL(request.url)
-    //Extraer queries después del ?
-    //console.log(serachParams)
-    //serachParams.get('nombre')
-    //serachParams.get('apellido')
-    const res = await fetch(`http://localhost:3000/api/merchant/${params.id}`)
-    const data = await res.json()
 
-    return NextResponse.json({data})
+export async function GET(request, { params }) {
+  try {
+    const users = JSON.parse(readFileSync("data/merchant.txt"));
+    const user = users.find((merchant) => merchant.id === params.id);
+
+    if (!user) {
+      return NextResponse.json({ message: "Merchant not found", status: 404 });
+    }
+
+    return NextResponse.json({ user });
+  } catch (error) {
+    console.error("Error fetching merchant:", error);
+    return NextResponse.json({ message: "Error fetching merchant", status: 500 });
+  }
 }

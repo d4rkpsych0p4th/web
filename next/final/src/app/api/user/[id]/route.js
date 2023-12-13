@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
+import { readFileSync } from 'fs';
 
-export async function GET(request, {params}) {
-    //console.log(params)
-    const {serachParams} = new URL(request.url)
-    //Extraer queries después del ?
-    //console.log(serachParams)
-    //serachParams.get('nombre')
-    //serachParams.get('apellido')
-    const res = await fetch(`http://localhost:3000/user/${params.id}`)
-    const data = await res.json()
 
-    return NextResponse.json({data})
+export async function GET(request, { params }) {
+  try {
+    const users = JSON.parse(readFileSync("data/user.txt"));
+    const user = users.find((user) => user.id === params.id);
+
+    if (!user) {
+      return NextResponse.json({ message: "user not found", status: 404 });
+    }
+
+    return NextResponse.json({ user });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return NextResponse.json({ message: "Error fetching user", status: 500 });
+  }
 }

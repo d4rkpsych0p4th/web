@@ -7,16 +7,16 @@ const Card = ({ merchant, onDelete }) => (
     <div className="card">
       <strong>{merchant.nombreComerciante}</strong>
       <div className="card-body">
-      <p>id: {merchant.id}</p>
+        <p>id: {merchant.id}</p>
         <p>Email: {merchant.email}</p>
         <p>CIF: {merchant.cif}</p>
         <p>Ciudad: {merchant.ciudad}</p>
         <p>Teléfono: {merchant.telefono}</p>
         <div>
         <button onClick={() => onDelete(merchant.email)} className="bg-red-500 text-white py-2 px-4 rounded-md mt-2">
-           Eliminar
-            </button>
-        </div>
+  Eliminar
+</button>
+</div>
       </div>
     </div>
   </div>
