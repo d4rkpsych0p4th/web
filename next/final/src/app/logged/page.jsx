@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import UserCard from '../components/MerchCard';
+import Link from 'next/link';
 
 const Logged = () => {
 
@@ -74,7 +75,9 @@ const Logged = () => {
       <div className="sticky top-0 ml-3 mt-8  card-list ">
         {filteredData.length > 0 ? (
           filteredData.map((comercio, index) => (
+            <Link href={`/comercio/${comercio.id}`} key={comercio.id}>
             <UserCard key={index} merchant={comercio} />
+            </Link>
           ))
         ) : (
           <div className="bg-gray-200 hidden rounded-md shadow-md">

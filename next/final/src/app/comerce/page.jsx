@@ -9,7 +9,7 @@ const Usuario = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [storedData, setStoredData] = useState([]);
-  const [photoUrl, setPhotoUrl] = useState('');
+
   
   async function loadUser(id) {
     const res = await fetch(`http://localhost:3000/api/merchant/${id}`);
@@ -17,31 +17,32 @@ const Usuario = () => {
     return data.user;
   }
 
-  const handleUpdateMerchant = async () => {
-    // Obtén los datos actuales del comercio
-    const currentMerchant = await loadUser(params.id);
 
-    // Combina los datos actuales con los nuevos datos introducidos por el usuario
-    const updatedData = {
-      ...currentMerchant,
-      ...newData,
-    };
+  // const handleUpdateMerchant = async () => {
+  //   // Obtén los datos actuales del comercio
+  //   const currentMerchant = await loadUser();
 
-    // Filtra los campos que no se han proporcionado (es decir, aquellos que están vacíos)
-    const filteredData = Object.keys(updatedData).reduce((acc, key) => {
-      if (newData[key] !== '') {
-        acc[key] = updatedData[key];
-      }
-      return acc;
-    }, {});
+  //   // Combina los datos actuales con los nuevos datos introducidos por el usuario
+  //   const updatedData = {
+  //     ...currentMerchant,
+  //     ...newData,
+  //   };
 
-    // Actualiza el comercio
-    await updateMerchant(params.id, filteredData);
+  //   // Filtra los campos que no se han proporcionado (es decir, aquellos que están vacíos)
+  //   const filteredData = Object.keys(updatedData).reduce((acc, key) => {
+  //     if (newData[key] !== '') {
+  //       acc[key] = updatedData[key];
+  //     }
+  //     return acc;
+  //   }, {});
 
-    // Recarga los datos después de la actualización
-    const updatedUser = await loadUser(params.id);
-    setMerchant(updatedUser);
-  };
+  //   // Actualiza el comercio
+  //   await updateMerchant(params.id, filteredData);
+
+  //   // Recarga los datos después de la actualización
+  //   const updatedUser = await loadUser(params.id);
+  //   setMerchant(updatedUser);
+  // };
 
   const fetchData = async () => {
     try {
@@ -55,6 +56,7 @@ const Usuario = () => {
       console.error(error);
     }
   };
+  
   useEffect(() => {
     // Obtener datos almacenados al cargar el componente
     fetchData();
@@ -78,17 +80,6 @@ const Usuario = () => {
       setFilteredData(filteredResults);
     };
     
- 
-  const handlePhotoUrlChange = (event) => {
-    // Handle the change in the photo URL text input
-    setPhotoUrl(event.target.value);
-  };
-  const handleSavePhotoUrl = () => {
-    // Handle saving the photo URL, you can perform additional logic if needed
-    console.log('Saved Photo URL:', photoUrl);
-    // Reset the input after saving
-    setPhotoUrl('');
-  };
   const backgroundImageStyle = {
     backgroundImage: `url('/assets/green.png')`,
     backgroundSize: 'cover', 
@@ -118,11 +109,12 @@ const Usuario = () => {
               type="text"
               value={id}
               onChange={handleUserIdChange}
+              className="block w-full p-2 border rounded-md"
             />
           </form>
 
           <Link href={`/comerce/${id}`} key={id}>
-            <button onClick={handleUpdateMerchant} className="mt-4 bg-blue-700 text-white py-2 px-4 rounded-md">
+            <button  className="mt-4 bg-blue-700 text-white py-2 px-4 rounded-md">
               EDITAR CUENTA
             </button>
           </Link>
@@ -131,7 +123,7 @@ const Usuario = () => {
           
 
 <div className="flex h-screen items-center justify-end p-8 ">
-        <div className="bg-gray-200 p-8 rounded-md shadow-md md:w-96">
+        <div className="bg-gray-300 p-8 rounded-md shadow-md md:w-96">
           <h2 className="text-2xl font-bold mb-4">Busqueda de Usuario</h2>
           <div className="mt-4">
             <label>Buscar Usuario:</label>
