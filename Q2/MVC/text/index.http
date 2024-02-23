@@ -6,12 +6,25 @@ GET http://localhost:3000/api/users
 
 GET http://localhost:3000/api/tracks
 
+
 ###
 
 
 GET http://localhost:3000/api/storage
 
+
 ###
+
+POST http://localhost:3000/api/storage HTTP/1.1
+Content-Type: multipart/form-data; boundary=Boundry
+
+--Boundry
+Content-Disposition: form-data; name="image"; filename="img.jpg"
+Content-Type: image/jpg
+
+< ./img.jpg
+--Boundry--
+
 ###
 
 POST http://localhost:3000/api/tracks HTTP/1.1
@@ -19,19 +32,19 @@ Content-Type: application/json
 
 {
     "dato": "basura",
-    "name": "Antonio",
+    "name": "cryptobro",
     "album": "cuentame",
-    "cover": "http://tttt.com",
+    "cover": "http://yyy.com",
     "artist": {
-        "name": "Ric",
-        "nickname": "parecefalso",
+        "name": "joe",
+        "nickname": "parecetrue",
         "nationality": "ES"
     },
     "duration": {
         "start":1,
         "end":2
     },
-    "mediaId": "0123456789abcdef01234567"
+    "mediaId": "0444456789abcdef01234567"
   
 }
 
