@@ -73,3 +73,107 @@ Authorization: Bearer
     "mediaId": "0444456789abcdef01234567"
   
 }
+
+###
+// API TEST POST
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+api_key: Api-publica-124
+
+{
+    "dato": "basura",
+    "name": "tetvalidaotr",
+    "album": "validate",
+    "cover": "TEST",
+    "artist": {
+        "name": "val",
+        "nickname": "deepfuckinvalue",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":3
+    },
+    "mediaId": "0444456789abcdef01234567"
+  
+}
+
+###
+// API TEST POST MATCHED DATA REQ(BODY)
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+api_key: Api-publica-123
+
+{
+    "dato": "basura",
+    "name": "tetvalidaotr",
+    "album": "validate",
+    "cover": "TEST",
+    "artist": {
+        "name": "val",
+        "nickname": "deepfuckinvalue",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":3
+    },
+    "mediaId": "0444456789abcdef01234567"
+  
+}
+
+###
+// GET DE 1 ITEM /:id(name)
+GET http://localhost:3000/api/tracks/cryptobro HTTP/1.1
+api_key: Api-publica-123
+
+
+
+
+###
+// GET DE 1 ITEM /:id(id)
+GET http://localhost:3000/api/tracks/65d46d39c7f1c3ab344362c0 HTTP/1.1
+api_key: Api-publica-123
+
+
+
+###
+// DELETE DE 1 ITEM /:id(name)
+DELETE http://localhost:3000/api/tracks/65d46d39c7f1c3ab344362c0 HTTP/1.1
+
+
+###
+// API TEST UPDATE
+PUT http://localhost:3000/api/tracks/65dda4006c052867817cf308 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "UPDATE",
+    "album": "CHANGE",
+    "cover": "TEST",
+    "artist": {
+        "name": "val",
+        "nickname": "deepfuckinvalue",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":3
+    },
+    "mediaId": "0444456789abcdef01234567"
+  
+}
+
+###
+// API TEST POST MATCHED DATA REQ(BODY)
+PUT http://localhost:3000/api/tracks/65dda4006c052867817cf308 HTTP/1.1
+Content-Type: application/json
+
+{
+    "dato": "basura",
+    "name": "tetvalidaotr",
+    "album": "validate",
+    "cover": "TEST",
+   
+  
+}
