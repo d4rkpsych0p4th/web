@@ -166,14 +166,23 @@ Content-Type: application/json
 
 ###
 // API TEST POST MATCHED DATA REQ(BODY)
-PUT http://localhost:3000/api/tracks/65dda4006c052867817cf308 HTTP/1.1
+PUT http://localhost:3000/api/tracks/65d46d39c7f1c3ab344362c0 HTTP/1.1
 Content-Type: application/json
+api_key: Api-publica-123
 
 {
-    "dato": "basura",
-    "name": "tetvalidaotr",
-    "album": "validate",
+    "name": "UPDATE",
+    "album": "CHANGE",
     "cover": "TEST",
-   
+    "artist": {
+        "name": "val",
+        "nickname": "deepfuckinvalue",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":3
+    },
+    "mediaId": "0123456789abcdef01234567"
   
 }

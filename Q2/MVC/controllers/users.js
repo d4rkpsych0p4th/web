@@ -1,11 +1,11 @@
-const { tracksModel } = require('../models')
+const { usersModel } = require('../models')
 //load de manejo de errores
 const { matchedData } = require('express-validator')
 const { handleHttpError } = require('../utils/handleError')
 
 const getItems = async (req, res) => {
     try{
-        const data = await tracksModel.find({})
+        const data = await usersModel.find({})
         res.send(data)
     }catch(err){
         //Si nos sirve el de por defecto que hemos establecido, no es necesario pasar el 403
@@ -22,7 +22,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
     try{
         const {id} = matchedData(req) //Me quedo solo con el id
-        const data = await tracksModel.findById(id)
+        const data = await usersModel.findById(id)
         res.send(data)
     } catch(err){
         //console.log(err)
@@ -40,7 +40,7 @@ const getItem = async (req, res) => {
     const createItem = async (req, res) => {
         try {
             const body = matchedData(req) //El dato filtrado por el modelo (probar con body=req)
-            const data = await tracksModel.create(body)
+            const data = await usersModel.create(body)
             res.send(data)
         }catch(err){
             handleHttpError(res, 'ERROR_CREATE_ITEMS')
@@ -53,7 +53,7 @@ const getItem = async (req, res) => {
         try {
             const {id, ...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
             //tiene que ser findbyid
-            const data = await tracksModel.findById(id, body);
+            const data = await usersModel.findById(id, body);
             console.log(data)
             res.send(data)    
         }catch(err){
@@ -66,7 +66,7 @@ const getItem = async (req, res) => {
     const deleteItem = async (req, res) => {
         try {
             const {id} = matchedData(req)
-            const data = await tracksModel.deleteOne({_id:id}); // "deleteOne" realiza el borrado físico en la BD
+            const data = await usersModel.deleteOne({_id:id}); // "deleteOne" realiza el borrado físico en la BD
             //const data = await tracksModel.delete({_id:id}); // "delete" realiza el borrado lógico
             res.send(data)    
         }catch(err){

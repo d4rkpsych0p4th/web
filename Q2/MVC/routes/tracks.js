@@ -16,7 +16,7 @@ router.get("/:id",validatorGetItem, getItem)
 router.post("/", validatorCreateItem, customHeader, createItem)
 
 //UPDATE ITEM
-router.put("/:id",validatorGetItem, validatorCreateItem, updateItem)
+router.put("/:id",validatorGetItem, validatorCreateItem,customHeader, updateItem)
 
 //Elimina un registro
 router.delete("/:id", validatorGetItem, deleteItem)
