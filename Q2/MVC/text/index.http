@@ -78,23 +78,23 @@ Authorization: Bearer
 // API TEST POST
 POST http://localhost:3000/api/tracks HTTP/1.1
 Content-Type: application/json
-api_key: Api-publica-124
+api_key: Api-publica-123
 
 {
     "dato": "basura",
-    "name": "tetvalidaotr",
-    "album": "validate",
-    "cover": "TEST",
+    "name": "deletetetst",
+    "album": "album",
+    "cover": "cover",
     "artist": {
         "name": "val",
-        "nickname": "deepfuckinvalue",
-        "nationality": "ES"
+        "nickname": "alue",
+        "nationality": "VAR"
     },
     "duration": {
         "start":1,
         "end":3
     },
-    "mediaId": "0444456789abcdef01234567"
+    "mediaId": "0444456789abcdef01222222"
   
 }
 
