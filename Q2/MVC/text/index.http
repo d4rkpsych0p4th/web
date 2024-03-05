@@ -3,6 +3,10 @@ GET http://localhost:3000/api/users
 
 ###
 
+GET http://localhost:3000/api/users/65d8da23601564a1a93bdc07
+
+###
+
 
 GET http://localhost:3000/api/tracks
 
@@ -139,7 +143,7 @@ api_key: Api-publica-123
 
 ###
 // DELETE DE 1 ITEM /:id(name)
-DELETE http://localhost:3000/api/tracks/65d46d39c7f1c3ab344362c0 HTTP/1.1
+DELETE http://localhost:3000/api/tracks/65e1d41fe2f8c22373d304fc HTTP/1.1
 
 
 ###
