@@ -12,5 +12,6 @@ router.post("/register", validatorRegister, registerCtrl)
 router.post("/login", validatorLogin, loginCtrl) 
 //PUT  http://localhost:3000/api/auth/:id
 router.put("/update/:email",authMiddleware,checkRol(["admin"]), updateUser) 
+//router.put("/:id",authMiddleware,checkRol(["admin"]), updateUser) 
 
 module.exports = router
