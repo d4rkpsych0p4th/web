@@ -7,13 +7,14 @@ const { getItems, getItem, createItem, updateItem, deleteItem} = require("../con
 const { validatorCreateItem,validatorGetItem } = require("../validators/tracks")
 //API CUSTOM VALIDATOR
 const customHeader = require("../middleware/customHeader")
-
+const authMiddleware = require("../middleware/session")
+const checkRol = require("../middleware/rol")
 //controller links
-router.get("/", getItems)
+router.get("/",authMiddleware ,getItems)
 //para un solo item
 router.get("/:id",validatorGetItem, getItem)
 //validator link + customheader api validator
-router.post("/", validatorCreateItem, customHeader, createItem)
+router.post("/", authMiddleware,checkRol(["admin"]),validatorCreateItem, createItem)
 
 //UPDATE ITEM
 router.put("/:id",validatorGetItem, validatorCreateItem,customHeader, updateItem)

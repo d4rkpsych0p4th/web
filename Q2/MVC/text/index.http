@@ -213,7 +213,7 @@ Content-Type: application/json
 
 {
     "email": "froggy@gmail.com",
-    "password": "passwordthefrog1111"
+    "password": "passwordthefrog"
   
 }
 
@@ -225,11 +225,86 @@ POST http://localhost:3000/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "blue",
+    "name": "green",
     "age": 22,
-    "email": "blueworld@gmail.com",
+    "email": "green@gmail.com",
     "password": "passwordtheworld"
   
 }
 
 ###
+###
+
+GET http://localhost:3000/api/tracks HTTP/1.1
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU2ZGM3YWZmNGY5MjQzNGUwODAzOTciLCJlbWFpbCI6ImZyb2dneUBnbWFpbC5jb20iLCJpYXQiOjE3MTAyMzEwODEsImV4cCI6MTcxMDIzODI4MX0.mEhahLv6GZoG0TSPL1O7KT0wFAS-1J7dAM4NZza_cjQ 
+
+
+###
+// TEST DE LOGINUSER Y POST ADMIN
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "blue@gmail.com",
+    "password": "passwordtheworld"
+}
+
+###
+//LOGIN
+###
+// TEST DE LOGINUSER Y POST ADMIN
+POST http://localhost:3000/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "purple",
+    "age": 22,
+    "email": "purple@gmail.com",
+    "password": "passwordtheworld",
+    "role":"admin"
+  
+}
+
+###
+###
+
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZTJlZjljZjA2MjJlY2Y2OGEiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzEwMjMzMDIwLCJleHAiOjE3MTAyNDAyMjB9.Lv9zkyC4vd4j1gXdk_khQ8LMDEVMdvF6uDBaJKLXe88
+
+{
+    "dato": "antoniiito",
+    "name": "antoniiitooss",
+    "album": "elveranoloco",
+    "cover": "antonin",
+    "artist": {
+        "name": "valorrrr",
+        "nickname": "deepfuckinvalue",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":3
+    },
+    "mediaId": "3344456789abcdef01234567"
+  
+}
+
+###65e6deb3ff4f92434e08039c
+PUT http://localhost:3000/api/auth/65e6deb3ff4f92434e08039c HTTP/1.1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZTJlZjljZjA2MjJlY2Y2OGEiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzEwMjMzMDIwLCJleHAiOjE3MTAyNDAyMjB9.Lv9zkyC4vd4j1gXdk_khQ8LMDEVMdvF6uDBaJKLXe88
+
+{
+    "role":"admin"
+}
+
+###
+PUT http://localhost:3000/api/auth/update/green@gmail.com HTTP/1.1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZTJlZjljZjA2MjJlY2Y2OGEiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzEwMjM1MjMyLCJleHAiOjE3MTAyNDI0MzJ9.aV_54abVxS51txPD35VJmMfl3pimNL1p87hm0fAR_3g
+
+{
+    "role":"admin"
+}
+
