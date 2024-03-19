@@ -314,8 +314,8 @@ POST http://localhost:3000/api/tracks HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "paula",
-    "album": "valiste",
+    "name": "paasdfasd",
+    "album": "asdfas",
     "cover": "TEST",
     "artist_name":"tuvieneja",
     "artist_nickname": "val",
