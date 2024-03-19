@@ -106,7 +106,7 @@ api_key: Api-publica-123
 // API TEST POST MATCHED DATA REQ(BODY)
 POST http://localhost:3000/api/tracks HTTP/1.1
 Content-Type: application/json
-api_key: Api-publica-123
+
 
 {
     "dato": "basura",
@@ -270,7 +270,7 @@ Content-Type: application/json
 
 POST http://localhost:3000/api/tracks HTTP/1.1
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZTJlZjljZjA2MjJlY2Y2OGEiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzEwMjMzMDIwLCJleHAiOjE3MTAyNDAyMjB9.Lv9zkyC4vd4j1gXdk_khQ8LMDEVMdvF6uDBaJKLXe88
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJwdXJwbGVAZ21haWwuY29tIiwiaWF0IjoxNzEwODM4NTU3LCJleHAiOjE3MTA4NDU3NTd9.RfL8QsEAsG5XWhw-Z3GlSkOek-mUefoe8u9bzSs7eTQ
 
 {
     "dato": "antoniiito",
@@ -293,7 +293,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZT
 ###65e6deb3ff4f92434e08039c
 PUT http://localhost:3000/api/auth/65e6deb3ff4f92434e08039c HTTP/1.1
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZTJlZjljZjA2MjJlY2Y2OGEiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzEwMjMzMDIwLCJleHAiOjE3MTAyNDAyMjB9.Lv9zkyC4vd4j1gXdk_khQ8LMDEVMdvF6uDBaJKLXe88
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJwdXJwbGVAZ21haWwuY29tIiwiaWF0IjoxNzEwODM4NTU3LCJleHAiOjE3MTA4NDU3NTd9.RfL8QsEAsG5XWhw-Z3GlSkOek-mUefoe8u9bzSs7eTQ
 
 {
     "role":"admin"
@@ -308,3 +308,21 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYwMTNkZT
     "role":"admin"
 }
 
+###
+// POST SQL
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "paula",
+    "album": "valiste",
+    "cover": "TEST",
+    "artist_name":"tuvieneja",
+    "artist_nickname": "val",
+    "artist_nationality": "ES",
+    "duration_start":3,
+    "duration_end":2,
+    "mediaId": "0444456789ddf01234567"
+}
+
+###

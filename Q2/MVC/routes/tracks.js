@@ -14,8 +14,8 @@ router.get("/",authMiddleware ,getItems)
 //para un solo item
 router.get("/:id",validatorGetItem, getItem)
 //validator link + customheader api validator
-router.post("/", authMiddleware,checkRol(["admin"]),validatorCreateItem, createItem)
-
+//router.post("/", authMiddleware,checkRol(["admin"]),validatorCreateItem, createItem)
+router.post("/",validatorCreateItem, createItem)
 //UPDATE ITEM
 router.put("/:id",validatorGetItem, validatorCreateItem,customHeader, updateItem)
 

@@ -1,6 +1,8 @@
 const { handleHttpError } = require("../utils/handleError")
 const { verifyToken } = require("../utils/handleJwt")
 const { usersModel } = require("../models")
+const getProperties = require("../utils/handlePropertiesEngine")
+const propertiesKey = getProperties()
 
 const authMiddleware = async (req, res, next) => {
     try{
@@ -13,15 +15,17 @@ const authMiddleware = async (req, res, next) => {
         const token = req.headers.authorization.split(' ').pop() 
         //Del token, miramos en Payload (revisar verifyToken de utils/handleJwt)
         const dataToken = await verifyToken(token)
+        
         if(!dataToken._id) {
             handleHttpError(res, "ERROR_ID_TOKEN", 401)
             return
         }
-
+        
         const user = await usersModel.findById(dataToken._id)
         req.user = user // Inyecto al user en la petición
 
-        next()
+        next() 
+       
 
     }catch(err){
         handleHttpError(res, "NOT_SESSION", 401)
@@ -29,3 +33,11 @@ const authMiddleware = async (req, res, next) => {
 }
 
 module.exports = authMiddleware
+
+//if(!dataToken){ //Eliminamos el dataToken._id
+  //  handleHttpError(res, "NOT_PAYLOAD_DATA", 401)
+   // return}const query = {// _id o id
+     //   [propertiesKey.id]: dataToken[propertiesKey.id]}
+        //const user = await usersModel.findById(dataToken._id) // findById solo para Mongoose
+       // const user = await usersModel.findOne(query) // findOne válido para Mongoose y Sequelize
+       // req.user = user // Inyecto al user en la peticiónnext()
