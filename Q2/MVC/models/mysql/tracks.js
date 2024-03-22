@@ -1,6 +1,6 @@
 const { sequelize } = require("../../config/mysql")
 const { DataTypes } = require("sequelize")
-const Storage = require("./storage")
+const Storage = require("./Storage")
 
 const Tracks = sequelize.define(
     "tracks", //Nombre de la tabla
