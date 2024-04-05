@@ -1,5 +1,6 @@
 
 GET http://localhost:3000/api/users
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJwdXJwbGVAZ21haWwuY29tIiwiaWF0IjoxNzEwODM4NTU3LCJleHAiOjE3MTA4NDU3NTd9.RfL8QsEAsG5XWhw-Z3GlSkOek-mUefoe8u9bzSs7eTQ
 
 ###
 
